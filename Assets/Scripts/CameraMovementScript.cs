@@ -8,7 +8,6 @@ public class CameraMovementScript : MonoBehaviour
     const float slow = 0.005f;
     const float max = 10f;
 
-    // Start is called before the first frame update
     void Start()
     {
         transform.position.Set(0, 0, -10);
@@ -16,7 +15,6 @@ public class CameraMovementScript : MonoBehaviour
         accelY = 0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
         DecelerateOverTime();

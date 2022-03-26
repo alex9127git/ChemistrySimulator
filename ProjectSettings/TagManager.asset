@@ -44,3 +44,6 @@ TagManager:
   - name: Objects
     uniqueID: 2210822017
     locked: 0
+  - name: Previews
+    uniqueID: 1079191653
+    locked: 0

@@ -7,10 +7,9 @@ public class ModeSwitcherScript : MonoBehaviour
     public static int modeType = 0;
     public Text textField;
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) && !MouseFollowScript.busy)
+        if (Input.GetKeyDown(KeyCode.Tab) && !BuildingPreviewScript.busy)
         {
             modeType += 1;
             modeType %= modes.Length;

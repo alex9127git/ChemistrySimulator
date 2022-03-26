@@ -4,6 +4,9 @@ public class ButtonsOnClickScript : MonoBehaviour
 {
     public GameObject buildingUI;
     public Transform waterExtractorPrefab;
+    public Transform waterExtractorPreview;
+    public Transform conveyorInputPreview;
+    public Transform conveyorOutputPreview;
 
     public void OpenBuildingUI()
     {
@@ -21,7 +24,10 @@ public class ButtonsOnClickScript : MonoBehaviour
         switch (building)
         {
             case "WaterExtractor":
-                Instantiate(waterExtractorPrefab, new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
+                Instantiate(waterExtractorPreview, new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
+                break;
+            case "Conveyor":
+                Instantiate(conveyorInputPreview, new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
                 break;
         }
     }
