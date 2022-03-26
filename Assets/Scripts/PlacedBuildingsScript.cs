@@ -51,6 +51,19 @@ public class PlacedBuildingsScript : MonoBehaviour
                     }
                 }
             }
+            if (gameObject.name.Contains("Conveyor"))
+            {
+                int x = (int)(transform.position.x + size / 2 - 0.5f);
+                int y = (int)(transform.position.y + size / 2 - 0.5f);
+                if (x >= 0 && x < size && y >= 0 && y < size)
+                {
+                    if (buildings[x, y] == "conveyor")
+                    {
+                        buildings[x, y] = "";
+                        Destroy(gameObject);
+                    }
+                }
+            }
         }
     }
 }

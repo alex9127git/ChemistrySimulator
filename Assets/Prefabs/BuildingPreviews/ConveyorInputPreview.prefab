@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7923083194680274036}
   - component: {fileID: 7221410512143424967}
+  - component: {fileID: 324602572002089389}
   m_Layer: 0
   m_Name: ConveyorInputPreview
   m_TagString: Untagged
@@ -84,3 +85,29 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &324602572002089389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3581694275803137461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 879f1eb5db5319049b1230eb3e0f181d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputPrefab: {fileID: 1881893149507328157, guid: 465f15feaf539f14282fd0bd65c6a9ca, type: 3}
+  outputPreview: {fileID: 6525376127122088316, guid: 26b38369a22888446a10925e11c36c8e, type: 3}
+  upright: {fileID: 4274472812852300748, guid: a9aa2c890d03e17459b9850d0919fd18, type: 3}
+  upleft: {fileID: 8887832657551671519, guid: c1630bdef5c815a4c833613923cd14b2, type: 3}
+  updown: {fileID: 8198671745747668609, guid: 35c88e94e4968da47a12d09ccf8a9a67, type: 3}
+  leftup: {fileID: 6592622809473620022, guid: 9aa49379a81d02449a31a24ecbb4c643, type: 3}
+  leftright: {fileID: 8803104769863746563, guid: da52c170ba88e8b4ba9f663bad7b8cef, type: 3}
+  leftdown: {fileID: 171813259831286327, guid: 3deb86266191607428b6eb5bcc593e0d, type: 3}
+  rightup: {fileID: 5850061121055691545, guid: c9ec6a5843a6fad47b3a1284990fe873, type: 3}
+  rightleft: {fileID: 7039085239769841507, guid: a082ebaa31086654a98826de8cfe9df6, type: 3}
+  rightdown: {fileID: 6247216075992788834, guid: 749f9abd7250dfb4ead6671865a71874, type: 3}
+  downup: {fileID: 848711272802049278, guid: ecf5eab3cc5805042a33821a812ada67, type: 3}
+  downleft: {fileID: 5938025042720514424, guid: 611ce4ffc4429244c8503e62607304d8, type: 3}
+  downright: {fileID: 3231239650858116642, guid: b4a92488cd18ab34b9c2adb52d533176, type: 3}

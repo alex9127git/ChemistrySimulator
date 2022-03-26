@@ -33,8 +33,8 @@ public class BuildingPreviewScript : MonoBehaviour
                     {
                         Instantiate(prefab, transform.position, Quaternion.identity);
                         buildings[x, y] = buildings[x, y + 1] = buildings[x, y - 1] = buildings[x - 1, y
-                            ] = buildings[x - 1, y + 1] = buildings[x - 1, y + 1] = buildings[x + 1, y
-                            ] = buildings[x + 1, y + 1] = buildings[x + 1, y + 1] = "waterExtractor";
+                            ] = buildings[x - 1, y + 1] = buildings[x - 1, y - 1] = buildings[x + 1, y
+                            ] = buildings[x + 1, y + 1] = buildings[x + 1, y - 1] = "waterExtractor";
                         Destroy(gameObject);
                         busy = false;
                     }
