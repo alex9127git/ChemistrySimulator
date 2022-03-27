@@ -15,4 +15,14 @@ public class GlobalVariables : MonoBehaviour
             }
         }
     }
+
+    public static int ConvertWorldCoordsToListIndex(float n)
+    {
+        return (int)(n + size / 2 - 0.5f);
+    }
+
+    public static float ConvertListIndexToWorldCoords(int n)
+    {
+        return n + 0.5f - size / 2;
+    }
 }

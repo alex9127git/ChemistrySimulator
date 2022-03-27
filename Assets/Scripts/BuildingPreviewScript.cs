@@ -23,13 +23,13 @@ public class BuildingPreviewScript : MonoBehaviour
         {
             if (gameObject.name == "WaterExtractorPreview(Clone)")
             {
-                int x = (int)(transform.position.x + size / 2 - 0.5f);
-                int y = (int)(transform.position.y + size / 2 - 0.5f);
+                int x = ConvertWorldCoordsToListIndex(transform.position.x);
+                int y = ConvertWorldCoordsToListIndex(transform.position.y);
                 if (x >= 0 && x < size && y >= 0 && y < size)
                 {
                     if (buildings[x, y] == "" && buildings[x, y + 1] == "" && buildings[x, y - 1] == "" &&
-                    buildings[x - 1, y] == "" && buildings[x - 1, y + 1] == "" && buildings[x - 1, y + 1] == "" &&
-                    buildings[x + 1, y] == "" && buildings[x + 1, y + 1] == "" && buildings[x + 1, y + 1] == "")
+                    buildings[x - 1, y] == "" && buildings[x - 1, y + 1] == "" && buildings[x - 1, y - 1] == "" &&
+                    buildings[x + 1, y] == "" && buildings[x + 1, y + 1] == "" && buildings[x + 1, y - 1] == "")
                     {
                         Instantiate(prefab, transform.position, Quaternion.identity);
                         buildings[x, y] = buildings[x, y + 1] = buildings[x, y - 1] = buildings[x - 1, y

@@ -62,8 +62,8 @@ public class ConveyorPreviewScript : MonoBehaviour
         int outRotation = (int)(transform.rotation.z / 4);
         for (int i = 0; i < path.Length / 2; i++)
         {
-            float x = path[i, 0] + 0.5f - size / 2;
-            float y = path[i, 1] + 0.5f - size / 2;
+            float x = ConvertListIndexToWorldCoords(path[i, 0]);
+            float y = ConvertListIndexToWorldCoords(path[i, 1]);
             int from = 0, to = 0;
             if (i == 0)
             {
@@ -126,11 +126,10 @@ public class ConveyorPreviewScript : MonoBehaviour
     public int[,] WaveAlgorithm()
     {
         GameObject input = GameObject.Find("ConveyorInputPlaced(Clone)");
-        int inX = (int)(input.transform.position.x + size / 2 - 0.5f);
-        int inY = (int)(input.transform.position.y + size / 2 - 0.5f);
-        int outX = (int)(transform.position.x + size / 2 - 0.5f);
-        int outY = (int)(transform.position.y + size / 2 - 0.5f);
-        Debug.Log(inX + " " + inY + " " + outX + " " + outY);
+        int inX = ConvertWorldCoordsToListIndex(input.transform.position.x);
+        int inY = ConvertWorldCoordsToListIndex(input.transform.position.y);
+        int outX = ConvertWorldCoordsToListIndex(transform.position.x);
+        int outY = ConvertWorldCoordsToListIndex(transform.position.y);
         int[,] map = new int[size, size];
         for (int i = 0; i < size; i++)
         {

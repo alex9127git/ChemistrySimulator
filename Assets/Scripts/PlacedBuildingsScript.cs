@@ -15,17 +15,17 @@ public class PlacedBuildingsScript : MonoBehaviour
         {
             if (gameObject.name == "WaterExtractor(Clone)")
             {
-                int x = (int)(transform.position.x + size / 2 - 0.5f);
-                int y = (int)(transform.position.y + size / 2 - 0.5f);
+                int x = ConvertWorldCoordsToListIndex(transform.position.x);
+                int y = ConvertWorldCoordsToListIndex(transform.position.y);
                 if (x >= 0 && x < size && y >= 0 && y < size)
                 {
                     if (buildings[x, y] == "waterExtractor" && buildings[x, y + 1] == "waterExtractor" && buildings[x, y - 1] == "waterExtractor" &&
-                    buildings[x - 1, y] == "waterExtractor" && buildings[x - 1, y + 1] == "waterExtractor" && buildings[x - 1, y + 1] == "waterExtractor" &&
-                    buildings[x + 1, y] == "waterExtractor" && buildings[x + 1, y + 1] == "waterExtractor" && buildings[x + 1, y + 1] == "waterExtractor")
+                    buildings[x - 1, y] == "waterExtractor" && buildings[x - 1, y + 1] == "waterExtractor" && buildings[x - 1, y - 1] == "waterExtractor" &&
+                    buildings[x + 1, y] == "waterExtractor" && buildings[x + 1, y + 1] == "waterExtractor" && buildings[x + 1, y - 1] == "waterExtractor")
                     {
                         buildings[x, y] = buildings[x, y + 1] = buildings[x, y - 1] = buildings[x - 1, y
-                            ] = buildings[x - 1, y + 1] = buildings[x - 1, y + 1] = buildings[x + 1, y
-                            ] = buildings[x + 1, y + 1] = buildings[x + 1, y + 1] = "";
+                            ] = buildings[x - 1, y + 1] = buildings[x - 1, y - 1] = buildings[x + 1, y
+                            ] = buildings[x + 1, y + 1] = buildings[x + 1, y - 1] = "";
                         Instantiate(preview, transform.position, Quaternion.identity);
                         Destroy(gameObject);
                     }
@@ -36,25 +36,25 @@ public class PlacedBuildingsScript : MonoBehaviour
         {
             if (gameObject.name == "WaterExtractor(Clone)")
             {
-                int x = (int)(transform.position.x + size / 2 - 0.5f);
-                int y = (int)(transform.position.y + size / 2 - 0.5f);
+                int x = ConvertWorldCoordsToListIndex(transform.position.x);
+                int y = ConvertWorldCoordsToListIndex(transform.position.y);
                 if (x >= 0 && x < size && y >= 0 && y < size)
                 {
                     if (buildings[x, y] == "waterExtractor" && buildings[x, y + 1] == "waterExtractor" && buildings[x, y - 1] == "waterExtractor" &&
-                    buildings[x - 1, y] == "waterExtractor" && buildings[x - 1, y + 1] == "waterExtractor" && buildings[x - 1, y + 1] == "waterExtractor" &&
-                    buildings[x + 1, y] == "waterExtractor" && buildings[x + 1, y + 1] == "waterExtractor" && buildings[x + 1, y + 1] == "waterExtractor")
+                    buildings[x - 1, y] == "waterExtractor" && buildings[x - 1, y + 1] == "waterExtractor" && buildings[x - 1, y - 1] == "waterExtractor" &&
+                    buildings[x + 1, y] == "waterExtractor" && buildings[x + 1, y + 1] == "waterExtractor" && buildings[x + 1, y - 1] == "waterExtractor")
                     {
                         buildings[x, y] = buildings[x, y + 1] = buildings[x, y - 1] = buildings[x - 1, y
-                                    ] = buildings[x - 1, y + 1] = buildings[x - 1, y + 1] = buildings[x + 1, y
-                                    ] = buildings[x + 1, y + 1] = buildings[x + 1, y + 1] = "";
+                                    ] = buildings[x - 1, y + 1] = buildings[x - 1, y - 1] = buildings[x + 1, y
+                                    ] = buildings[x + 1, y + 1] = buildings[x + 1, y - 1] = "";
                         Destroy(gameObject);
                     }
                 }
             }
             if (gameObject.name.Contains("Conveyor"))
             {
-                int x = (int)(transform.position.x + size / 2 - 0.5f);
-                int y = (int)(transform.position.y + size / 2 - 0.5f);
+                int x = ConvertWorldCoordsToListIndex(transform.position.x);
+                int y = ConvertWorldCoordsToListIndex(transform.position.y);
                 if (x >= 0 && x < size && y >= 0 && y < size)
                 {
                     if (buildings[x, y] == "conveyor")
