@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2736608918818745883}
   m_Layer: 0
   m_Name: DownLeftConveyor
-  m_TagString: Untagged
+  m_TagString: Conveyor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -34,14 +34,14 @@ public class ConveyorPreviewScript : MonoBehaviour
         busy = true;
         if (Input.GetMouseButtonDown(0))
         {
-            if (gameObject.name == "ConveyorInputPreview(Clone)")
+            if (gameObject.tag == "ConveyorInputPreview")
             {
                 Instantiate(inputPrefab, transform.position, transform.rotation);
                 Instantiate(outputPreview, transform.position, Quaternion.identity);
                 Destroy(gameObject);
                 busy = false;
             }
-            else if (gameObject.name == "ConveyorOutputPreview(Clone)")
+            else if (gameObject.tag == "ConveyorOutputPreview")
             {
                 int[,] path = WaveAlgorithm();
                 InstantiateConveyorBelt(path);
@@ -57,7 +57,7 @@ public class ConveyorPreviewScript : MonoBehaviour
 
     private void InstantiateConveyorBelt(int[,] path)
     {
-        GameObject input = GameObject.Find("ConveyorInputPlaced(Clone)");
+        GameObject input = GameObject.FindWithTag("ConveyorInputPreview");
         int inRotation = (int)(input.transform.rotation.z / 4);
         int outRotation = (int)(transform.rotation.z / 4);
         for (int i = 0; i < path.Length / 2; i++)
@@ -117,15 +117,15 @@ public class ConveyorPreviewScript : MonoBehaviour
                     }
                 }
             }
-            Instantiate(conveyorPrefabs[from, to], new Vector3(x, y), Quaternion.identity);
-            buildings[path[i, 0], path[i, 1]] = "conveyor";
+            GameObject obj = Instantiate(conveyorPrefabs[from, to], new Vector3(x, y), Quaternion.identity).gameObject;
+            buildings[path[i, 0], path[i, 1]] = obj;
         }
         Destroy(input);
     }
 
     public int[,] WaveAlgorithm()
     {
-        GameObject input = GameObject.Find("ConveyorInputPlaced(Clone)");
+        GameObject input = GameObject.FindWithTag("ConveyorInputPreview");
         int inX = ConvertWorldCoordsToListIndex(input.transform.position.x);
         int inY = ConvertWorldCoordsToListIndex(input.transform.position.y);
         int outX = ConvertWorldCoordsToListIndex(transform.position.x);
@@ -139,7 +139,7 @@ public class ConveyorPreviewScript : MonoBehaviour
                 {
                     map[inX, inY] = 0;
                 }
-                else if (buildings[i, j] == "")
+                else if (buildings[i, j] == null)
                 {
                     map[i, j] = -1;
                 }

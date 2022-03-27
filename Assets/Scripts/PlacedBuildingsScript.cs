@@ -13,19 +13,19 @@ public class PlacedBuildingsScript : MonoBehaviour
         float dist = Mathf.Sqrt(distX * distX + distY * distY);
         if (ModeSwitcherScript.modeType == 1 && Input.GetMouseButtonDown(0) && dist < 1 && !BuildingPreviewScript.busy)
         {
-            if (gameObject.name == "WaterExtractor(Clone)")
+            if (gameObject.tag == "WaterExtractor")
             {
                 int x = ConvertWorldCoordsToListIndex(transform.position.x);
                 int y = ConvertWorldCoordsToListIndex(transform.position.y);
                 if (x >= 0 && x < size && y >= 0 && y < size)
                 {
-                    if (buildings[x, y] == "waterExtractor" && buildings[x, y + 1] == "waterExtractor" && buildings[x, y - 1] == "waterExtractor" &&
-                    buildings[x - 1, y] == "waterExtractor" && buildings[x - 1, y + 1] == "waterExtractor" && buildings[x - 1, y - 1] == "waterExtractor" &&
-                    buildings[x + 1, y] == "waterExtractor" && buildings[x + 1, y + 1] == "waterExtractor" && buildings[x + 1, y - 1] == "waterExtractor")
+                    if (buildings[x, y].tag == "WaterExtractor" && buildings[x, y + 1].tag == "WaterExtractor" && buildings[x, y - 1].tag == "WaterExtractor" &&
+                    buildings[x - 1, y].tag == "WaterExtractor" && buildings[x - 1, y + 1].tag == "WaterExtractor" && buildings[x - 1, y - 1].tag == "WaterExtractor" &&
+                    buildings[x + 1, y].tag == "WaterExtractor" && buildings[x + 1, y + 1].tag == "WaterExtractor" && buildings[x + 1, y - 1].tag == "WaterExtractor")
                     {
-                        buildings[x, y] = buildings[x, y + 1] = buildings[x, y - 1] = buildings[x - 1, y
-                            ] = buildings[x - 1, y + 1] = buildings[x - 1, y - 1] = buildings[x + 1, y
-                            ] = buildings[x + 1, y + 1] = buildings[x + 1, y - 1] = "";
+                        buildings[x, y] = buildings[x, y + 1] = buildings[x, y - 1] = 
+                            buildings[x - 1, y] = buildings[x - 1, y + 1] = buildings[x - 1, y - 1] = 
+                            buildings[x + 1, y] = buildings[x + 1, y + 1] = buildings[x + 1, y - 1] = null;
                         Instantiate(preview, transform.position, Quaternion.identity);
                         Destroy(gameObject);
                     }
@@ -34,32 +34,32 @@ public class PlacedBuildingsScript : MonoBehaviour
         }
         if (ModeSwitcherScript.modeType == 2 && Input.GetMouseButtonDown(0) && dist < 1 && !BuildingPreviewScript.busy)
         {
-            if (gameObject.name == "WaterExtractor(Clone)")
+            if (gameObject.tag == "WaterExtractor")
             {
                 int x = ConvertWorldCoordsToListIndex(transform.position.x);
                 int y = ConvertWorldCoordsToListIndex(transform.position.y);
                 if (x >= 0 && x < size && y >= 0 && y < size)
                 {
-                    if (buildings[x, y] == "waterExtractor" && buildings[x, y + 1] == "waterExtractor" && buildings[x, y - 1] == "waterExtractor" &&
-                    buildings[x - 1, y] == "waterExtractor" && buildings[x - 1, y + 1] == "waterExtractor" && buildings[x - 1, y - 1] == "waterExtractor" &&
-                    buildings[x + 1, y] == "waterExtractor" && buildings[x + 1, y + 1] == "waterExtractor" && buildings[x + 1, y - 1] == "waterExtractor")
+                    if (buildings[x, y].tag == "WaterExtractor" && buildings[x, y + 1].tag == "WaterExtractor" && buildings[x, y - 1].tag == "WaterExtractor" &&
+                    buildings[x - 1, y].tag == "WaterExtractor" && buildings[x - 1, y + 1].tag == "WaterExtractor" && buildings[x - 1, y - 1].tag == "WaterExtractor" &&
+                    buildings[x + 1, y].tag == "WaterExtractor" && buildings[x + 1, y + 1].tag == "WaterExtractor" && buildings[x + 1, y - 1].tag == "WaterExtractor")
                     {
                         buildings[x, y] = buildings[x, y + 1] = buildings[x, y - 1] = buildings[x - 1, y
                                     ] = buildings[x - 1, y + 1] = buildings[x - 1, y - 1] = buildings[x + 1, y
-                                    ] = buildings[x + 1, y + 1] = buildings[x + 1, y - 1] = "";
+                                    ] = buildings[x + 1, y + 1] = buildings[x + 1, y - 1] = null;
                         Destroy(gameObject);
                     }
                 }
             }
-            if (gameObject.name.Contains("Conveyor"))
+            if (gameObject.tag == "Conveyor")
             {
                 int x = ConvertWorldCoordsToListIndex(transform.position.x);
                 int y = ConvertWorldCoordsToListIndex(transform.position.y);
                 if (x >= 0 && x < size && y >= 0 && y < size)
                 {
-                    if (buildings[x, y] == "conveyor")
+                    if (buildings[x, y].tag == "Conveyor")
                     {
-                        buildings[x, y] = "";
+                        buildings[x, y] = null;
                         Destroy(gameObject);
                     }
                 }

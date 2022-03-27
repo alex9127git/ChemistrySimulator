@@ -3,7 +3,7 @@ using UnityEngine;
 public class GlobalVariables : MonoBehaviour
 {
     public const int size = 100;
-    public static string[,] buildings = new string[size, size];
+    public static GameObject[,] buildings = new GameObject[size, size];
 
     void Start()
     {
@@ -11,7 +11,7 @@ public class GlobalVariables : MonoBehaviour
         {
             for (int j = 0; j < size; j++)
             {
-                buildings[i, j] = "";
+                buildings[i, j] = null;
             }
         }
     }

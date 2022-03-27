@@ -19,6 +19,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ConveyorInputPlaced
       objectReference: {fileID: 0}
+    - target: {fileID: 3581694275803137461, guid: 3e5953b46ed49cb4db72709ebd7420d0, type: 3}
+      propertyPath: m_TagString
+      value: ConveyorInputPreview
+      objectReference: {fileID: 0}
     - target: {fileID: 7923083194680274036, guid: 3e5953b46ed49cb4db72709ebd7420d0, type: 3}
       propertyPath: m_RootOrder
       value: 0
