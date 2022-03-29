@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8803104769863746563}
   - component: {fileID: 7257851626207695662}
   - component: {fileID: -9021273590837776774}
+  - component: {fileID: 48277267296567830}
   m_Layer: 0
   m_Name: LeftRightConveyor
   m_TagString: Conveyor
@@ -98,3 +99,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preview: {fileID: 0}
+--- !u!114 &48277267296567830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2985527784268105366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2fd686e32c7e9844befb2c33635236b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  H2O: {fileID: 1408795240981877075, guid: efec58b077c8b1f4d99562c6c52a825b, type: 3}

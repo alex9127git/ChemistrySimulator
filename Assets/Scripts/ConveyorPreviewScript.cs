@@ -58,8 +58,8 @@ public class ConveyorPreviewScript : MonoBehaviour
     private void InstantiateConveyorBelt(int[,] path)
     {
         GameObject input = GameObject.FindWithTag("ConveyorInputPreview");
-        int inRotation = (int)(input.transform.rotation.z / 4);
-        int outRotation = (int)(transform.rotation.z / 4);
+        int inRotation = (int)(input.transform.rotation.eulerAngles.z / 90);
+        int outRotation = (int)(transform.rotation.eulerAngles.z / 90);
         for (int i = 0; i < path.Length / 2; i++)
         {
             float x = ConvertListIndexToWorldCoords(path[i, 0]);

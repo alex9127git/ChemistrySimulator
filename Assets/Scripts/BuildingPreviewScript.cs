@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using static GlobalVariables;
 
@@ -10,8 +9,6 @@ public class BuildingPreviewScript : MonoBehaviour
     void Update()
     {
         Vector3 v = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float distX = transform.position.x - v.x;
-        float distY = transform.position.y - v.y;
         v.x = (int)(v.x) - 0.5f;
         v.y = (int)(v.y) - 0.5f;
         v.z = 0;
