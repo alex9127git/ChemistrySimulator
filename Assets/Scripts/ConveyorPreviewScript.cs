@@ -12,11 +12,11 @@ public class ConveyorPreviewScript : MonoBehaviour
 
     void Start()
     {
-        conveyorPrefabs = new Transform[4, 4] 
+        conveyorPrefabs = new Transform[4, 4]
         {
-            {rightleft, rightup, rightleft, rightdown}, 
+            {rightleft, rightup, rightleft, rightdown},
             {upright, updown, upleft, updown},
-            {leftright, leftup, leftright, leftdown}, 
+            {leftright, leftup, leftright, leftdown},
             {downright, downup, downleft, downup}
         };
     }
@@ -27,8 +27,8 @@ public class ConveyorPreviewScript : MonoBehaviour
         float distX = transform.position.x - v.x;
         float distY = transform.position.y - v.y;
         float dist = Mathf.Sqrt(distX * distX + distY * distY);
-        v.x = (int)(v.x) - 0.5f;
-        v.y = (int)(v.y) - 0.5f;
+        v.x = (int)v.x;
+        v.y = (int)v.y;
         v.z = 0;
         transform.position = v;
         busy = true;
@@ -62,8 +62,8 @@ public class ConveyorPreviewScript : MonoBehaviour
         int outRotation = (int)(transform.rotation.eulerAngles.z / 90);
         for (int i = 0; i < path.Length / 2; i++)
         {
-            float x = ConvertListIndexToWorldCoords(path[i, 0]);
-            float y = ConvertListIndexToWorldCoords(path[i, 1]);
+            float x = path[i, 0];
+            float y = path[i, 1];
             int from = 0, to = 0;
             if (i == 0)
             {
@@ -126,10 +126,10 @@ public class ConveyorPreviewScript : MonoBehaviour
     public int[,] WaveAlgorithm()
     {
         GameObject input = GameObject.FindWithTag("ConveyorInputPreview");
-        int inX = ConvertWorldCoordsToListIndex(input.transform.position.x);
-        int inY = ConvertWorldCoordsToListIndex(input.transform.position.y);
-        int outX = ConvertWorldCoordsToListIndex(transform.position.x);
-        int outY = ConvertWorldCoordsToListIndex(transform.position.y);
+        int inX = (int)input.transform.position.x;
+        int inY = (int)input.transform.position.y;
+        int outX = (int)transform.position.x;
+        int outY = (int)transform.position.y;
         int[,] map = new int[size, size];
         for (int i = 0; i < size; i++)
         {
@@ -147,7 +147,8 @@ public class ConveyorPreviewScript : MonoBehaviour
             }
         }
         int n = 0;
-        while (map[outX, outY] == -1 && Contains(map, size, -1)) {
+        while (map[outX, outY] == -1 && Contains(map, size, -1))
+        {
             for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)

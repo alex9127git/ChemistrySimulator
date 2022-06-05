@@ -7,13 +7,17 @@ public class ConveyorScript : MonoBehaviour
     private float inputX, inputY, outputX, outputY;
     private int indexX, indexY;
     public Transform H2O;
+    private bool hasItem, clogged;
 
-    public int IndexX { get => indexX; set => indexX = value; }
-    public int IndexY { get => indexY; set => indexY = value; }
-    public float OutputX { get => outputX; set => outputX = value; }
-    public float OutputY { get => outputY; set => outputY = value; }
-    public float InputX { get => inputX; set => inputX = value; }
-    public float InputY { get => inputY; set => inputY = value; }
+    public int IndexX { get => indexX; }
+    public int IndexY { get => indexY; }
+    public float OutputX { get => outputX; }
+    public float OutputY { get => outputY; }
+    public float InputX { get => inputX; }
+    public float InputY { get => inputY; }
+    public GameObject Output { get => output; }
+    public bool HasItem { get => hasItem; }
+    public bool Clogged { get => clogged; }
 
     void Start()
     {
@@ -23,11 +27,12 @@ public class ConveyorScript : MonoBehaviour
     void Update()
     {
         UpdateConveyor();
-        int x = ConvertWorldCoordsToListIndex(transform.position.x);
-        int y = ConvertWorldCoordsToListIndex(transform.position.y);
+        int x = (int)transform.position.x;
+        int y = (int)transform.position.y;
         if (conveyorItems[x, y] == null && input != null && input.tag == "WaterExtractor")
         {
-            if (inputX < transform.position.x) {
+            if (inputX < transform.position.x)
+            {
                 conveyorItems[x, y] = Instantiate(H2O, new Vector3(inputX + 0.1f, inputY), Quaternion.identity).gameObject;
             }
             else if (inputX > transform.position.x)
@@ -43,13 +48,16 @@ public class ConveyorScript : MonoBehaviour
                 conveyorItems[x, y] = Instantiate(H2O, new Vector3(inputX, inputY - 0.1f), Quaternion.identity).gameObject;
             }
         }
+        hasItem = conveyorItems[x, y] != null;
+        GameObject nextConveyor = output;
+        clogged = (hasItem && nextConveyor == null) || (hasItem && nextConveyor.GetComponent<ConveyorScript>().Clogged);
     }
 
     void UpdateConveyor()
     {
         string name = gameObject.name;
-        indexX = ConvertWorldCoordsToListIndex(transform.position.x);
-        indexY = ConvertWorldCoordsToListIndex(transform.position.y);
+        indexX = (int)transform.position.x;
+        indexY = (int)transform.position.y;
         if (name.StartsWith("Right") && indexX < size - 1)
         {
             input = buildings[indexX + 1, indexY];

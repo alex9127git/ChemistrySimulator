@@ -15,8 +15,8 @@ public class PlacedBuildingsScript : MonoBehaviour
         {
             if (gameObject.tag == "WaterExtractor")
             {
-                int x = ConvertWorldCoordsToListIndex(transform.position.x);
-                int y = ConvertWorldCoordsToListIndex(transform.position.y);
+                int x = (int) transform.position.x;
+                int y = (int) transform.position.y;
                 if (x >= 0 && x < size && y >= 0 && y < size)
                 {
                     if (buildings[x, y].tag == "WaterExtractor" && buildings[x, y + 1].tag == "WaterExtractor" && buildings[x, y - 1].tag == "WaterExtractor" &&
@@ -36,8 +36,8 @@ public class PlacedBuildingsScript : MonoBehaviour
         {
             if (gameObject.tag == "WaterExtractor")
             {
-                int x = ConvertWorldCoordsToListIndex(transform.position.x);
-                int y = ConvertWorldCoordsToListIndex(transform.position.y);
+                int x = (int) transform.position.x;
+                int y = (int) transform.position.y;
                 if (x >= 0 && x < size && y >= 0 && y < size)
                 {
                     if (buildings[x, y].tag == "WaterExtractor" && buildings[x, y + 1].tag == "WaterExtractor" && buildings[x, y - 1].tag == "WaterExtractor" &&
@@ -53,8 +53,8 @@ public class PlacedBuildingsScript : MonoBehaviour
             }
             if (gameObject.tag == "Conveyor")
             {
-                int x = ConvertWorldCoordsToListIndex(transform.position.x);
-                int y = ConvertWorldCoordsToListIndex(transform.position.y);
+                int x = (int) transform.position.x;
+                int y = (int) transform.position.y;
                 if (x >= 0 && x < size && y >= 0 && y < size)
                 {
                     if (buildings[x, y].tag == "Conveyor")

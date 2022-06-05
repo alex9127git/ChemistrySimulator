@@ -9,8 +9,8 @@ public class BuildingPreviewScript : MonoBehaviour
     void Update()
     {
         Vector3 v = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        v.x = (int)(v.x) - 0.5f;
-        v.y = (int)(v.y) - 0.5f;
+        v.x = (int)v.x;
+        v.y = (int)v.y;
         v.z = 0;
         transform.position = v;
         transform.rotation = Quaternion.identity;
@@ -19,8 +19,8 @@ public class BuildingPreviewScript : MonoBehaviour
         {
             if (gameObject.tag == "WaterExtractorPreview")
             {
-                int x = ConvertWorldCoordsToListIndex(transform.position.x);
-                int y = ConvertWorldCoordsToListIndex(transform.position.y);
+                int x = (int)transform.position.x;
+                int y = (int)transform.position.y;
                 if (x >= 0 && x < size && y >= 0 && y < size)
                 {
                     if (buildings[x, y] == null && buildings[x, y + 1] == null && buildings[x, y - 1] == null &&

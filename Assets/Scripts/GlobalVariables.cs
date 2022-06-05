@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class GlobalVariables : MonoBehaviour
@@ -17,15 +16,5 @@ public class GlobalVariables : MonoBehaviour
                 conveyorItems[i, j] = null;
             }
         }
-    }
-
-    public static int ConvertWorldCoordsToListIndex(float n)
-    {
-        return (int)decimal.Round((decimal)(n + size / 2 - 0.5f), MidpointRounding.AwayFromZero);
-    }
-
-    public static float ConvertListIndexToWorldCoords(int n)
-    {
-        return n + 0.5f - size / 2;
     }
 }

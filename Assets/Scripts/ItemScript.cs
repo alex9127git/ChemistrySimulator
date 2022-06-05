@@ -40,9 +40,10 @@ public class ItemScript : MonoBehaviour
 
     void GetNewCoordinates()
     {
-        indexX = ConvertWorldCoordsToListIndex(transform.position.x);
-        indexY = ConvertWorldCoordsToListIndex(transform.position.y);
+        indexX = (int)decimal.Round((decimal)transform.position.x);
+        indexY = (int)decimal.Round((decimal)transform.position.y);
         GameObject conveyor = buildings[indexX, indexY];
+        conveyorItems[indexX, indexY] = gameObject;
         if (conveyor != null && conveyor.tag == "Conveyor")
         {
             centerX = conveyor.transform.position.x;
@@ -57,9 +58,11 @@ public class ItemScript : MonoBehaviour
             toY = centerY;
             reachedCenter = false;
             DefineDirection(fromX, fromY, toX, toY);
-        } else
+        }
+        else
         {
             fromX = fromY = toX = toY = 0;
+            DefineDirection(fromX, fromY, toX, toY);
         }
     }
 
@@ -89,7 +92,7 @@ public class ItemScript : MonoBehaviour
 
     void CheckReach(float x, float y)
     {
-        if ((direction == "left" && transform.position.x < x) || (direction == "right" && transform.position.x > x) || 
+        if ((direction == "left" && transform.position.x < x) || (direction == "right" && transform.position.x > x) ||
             (direction == "up" && transform.position.y > y) || (direction == "down" && transform.position.y < y))
         {
             reachedCenter = !reachedCenter;
@@ -103,8 +106,18 @@ public class ItemScript : MonoBehaviour
             }
             else
             {
-                conveyorItems[indexX, indexY] = null;
-                GetNewCoordinates();
+                GameObject conveyor = buildings[(int)transform.position.x, (int)transform.position.y];
+                GameObject nextConveyor = conveyor.GetComponent<ConveyorScript>().Output;
+                if (nextConveyor == null || nextConveyor.GetComponent<ConveyorScript>().Clogged)
+                {
+                    fromX = fromY = toX = toY = 0;
+                    DefineDirection(fromX, fromY, toX, toY);
+                }
+                else
+                {
+                    conveyorItems[indexX, indexY] = null;
+                    GetNewCoordinates();
+                }
             }
         }
     }
