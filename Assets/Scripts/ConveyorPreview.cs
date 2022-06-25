@@ -1,7 +1,7 @@
 using UnityEngine;
 using static GlobalVariables;
 
-public class ConveyorPreviewScript : MonoBehaviour
+public class ConveyorPreview : MonoBehaviour
 {
     public static bool busy;
     public Transform inputPrefab;

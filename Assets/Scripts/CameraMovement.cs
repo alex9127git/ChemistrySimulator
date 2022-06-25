@@ -1,16 +1,15 @@
 using UnityEngine;
 
-public class CameraMovementScript : MonoBehaviour
+public class CameraMovement : MonoBehaviour
 {
     public float accelX;
     public float accelY;
     const float delta = 0.02f;
-    const float slow = 0.005f;
+    const float slow = 0.01f;
     const float max = 10f;
 
     void Start()
     {
-        transform.position.Set(0, 0, -10);
         accelX = 0f;
         accelY = 0f;
     }
@@ -22,7 +21,7 @@ public class CameraMovementScript : MonoBehaviour
         transform.position += new Vector3(accelX * Time.deltaTime, accelY * Time.deltaTime);
     }
 
-    void Accelerate()
+    void DecelerateOverTime()
     {
         if (accelX > 0)
         {
@@ -58,7 +57,7 @@ public class CameraMovementScript : MonoBehaviour
         }
     }
 
-    void DecelerateOverTime()
+    void Accelerate()
     {
         if (Input.GetKey(KeyCode.A))
         {

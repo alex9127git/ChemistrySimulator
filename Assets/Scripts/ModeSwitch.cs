@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ModeSwitcherScript : MonoBehaviour
+public class ModeSwitch : MonoBehaviour
 {
     string[] modes = {"Spying Mode", "Moving Mode", "Deleting Mode"};
     public static int modeType = 0;
@@ -9,7 +9,7 @@ public class ModeSwitcherScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) && !BuildingPreviewScript.busy)
+        if (Input.GetKeyDown(KeyCode.Tab) && !BuildingPreview.busy)
         {
             modeType += 1;
             modeType %= modes.Length;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ButtonsOnClickScript : MonoBehaviour
+public class ButtonsOnClick : MonoBehaviour
 {
     public GameObject buildingUI;
     public Transform waterExtractorPrefab;
@@ -29,6 +29,14 @@ public class ButtonsOnClickScript : MonoBehaviour
             case "Conveyor":
                 Instantiate(conveyorInputPreview, new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
                 break;
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            buildingUI.SetActive(!buildingUI.activeSelf);
         }
     }
 }

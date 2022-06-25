@@ -1,7 +1,7 @@
 using UnityEngine;
 using static GlobalVariables;
 
-public class BuildingPreviewScript : MonoBehaviour
+public class BuildingPreview : MonoBehaviour
 {
     public static bool busy;
     public Transform prefab;

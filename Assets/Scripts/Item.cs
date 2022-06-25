@@ -1,7 +1,8 @@
+using System;
 using UnityEngine;
 using static GlobalVariables;
 
-public class ItemScript : MonoBehaviour
+public class Item : MonoBehaviour
 {
     private int indexX, indexY;
     private float centerX, centerY, inputX, inputY, outputX, outputY;
@@ -17,7 +18,7 @@ public class ItemScript : MonoBehaviour
         GetNewCoordinates();
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (direction == "left")
         {
@@ -48,10 +49,10 @@ public class ItemScript : MonoBehaviour
         {
             centerX = conveyor.transform.position.x;
             centerY = conveyor.transform.position.y;
-            inputX = conveyor.GetComponent<ConveyorScript>().InputX;
-            inputY = conveyor.GetComponent<ConveyorScript>().InputY;
-            outputX = conveyor.GetComponent<ConveyorScript>().OutputX;
-            outputY = conveyor.GetComponent<ConveyorScript>().OutputY;
+            inputX = conveyor.GetComponent<Conveyor>().InputX;
+            inputY = conveyor.GetComponent<Conveyor>().InputY;
+            outputX = conveyor.GetComponent<Conveyor>().OutputX;
+            outputY = conveyor.GetComponent<Conveyor>().OutputY;
             fromX = inputX;
             fromY = inputY;
             toX = centerX;
@@ -98,26 +99,26 @@ public class ItemScript : MonoBehaviour
             reachedCenter = !reachedCenter;
             if (reachedCenter)
             {
-                fromX = centerX;
-                fromY = centerY;
-                toX = outputX;
-                toY = outputY;
-                DefineDirection(fromX, fromY, toX, toY);
-            }
-            else
-            {
                 GameObject conveyor = buildings[(int)transform.position.x, (int)transform.position.y];
-                GameObject nextConveyor = conveyor.GetComponent<ConveyorScript>().Output;
-                if (nextConveyor == null || nextConveyor.GetComponent<ConveyorScript>().Clogged)
+                GameObject nextConveyor = conveyor.GetComponent<Conveyor>().Output;
+                if (nextConveyor == null || nextConveyor.GetComponent<Conveyor>().Clogged)
                 {
                     fromX = fromY = toX = toY = 0;
                     DefineDirection(fromX, fromY, toX, toY);
                 }
                 else
                 {
-                    conveyorItems[indexX, indexY] = null;
-                    GetNewCoordinates();
+                    fromX = centerX;
+                    fromY = centerY;
+                    toX = outputX;
+                    toY = outputY;
+                    DefineDirection(fromX, fromY, toX, toY);
                 }
+            }
+            else
+            {
+                conveyorItems[indexX, indexY] = null;
+                GetNewCoordinates();
             }
         }
     }

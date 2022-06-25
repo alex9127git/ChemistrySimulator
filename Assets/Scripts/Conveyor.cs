@@ -1,7 +1,7 @@
 using UnityEngine;
 using static GlobalVariables;
 
-public class ConveyorScript : MonoBehaviour
+public class Conveyor : MonoBehaviour
 {
     private GameObject input, output;
     private float inputX, inputY, outputX, outputY;
@@ -50,7 +50,7 @@ public class ConveyorScript : MonoBehaviour
         }
         hasItem = conveyorItems[x, y] != null;
         GameObject nextConveyor = output;
-        clogged = (hasItem && nextConveyor == null) || (hasItem && nextConveyor.GetComponent<ConveyorScript>().Clogged);
+        clogged = (hasItem && nextConveyor == null) || (hasItem && nextConveyor.GetComponent<Conveyor>().Clogged);
     }
 
     void UpdateConveyor()

@@ -1,7 +1,7 @@
 using UnityEngine;
 using static GlobalVariables;
 
-public class PlacedBuildingsScript : MonoBehaviour
+public class Building : MonoBehaviour
 {
     public Transform preview;
 
@@ -11,7 +11,7 @@ public class PlacedBuildingsScript : MonoBehaviour
         float distX = transform.position.x - v.x;
         float distY = transform.position.y - v.y;
         float dist = Mathf.Sqrt(distX * distX + distY * distY);
-        if (ModeSwitcherScript.modeType == 1 && Input.GetMouseButtonDown(0) && dist < 1 && !BuildingPreviewScript.busy)
+        if (ModeSwitch.modeType == 1 && Input.GetMouseButtonDown(0) && dist < 1 && !BuildingPreview.busy)
         {
             if (gameObject.tag == "WaterExtractor")
             {
@@ -32,7 +32,7 @@ public class PlacedBuildingsScript : MonoBehaviour
                 }
             }
         }
-        if (ModeSwitcherScript.modeType == 2 && Input.GetMouseButtonDown(0) && dist < 1 && !BuildingPreviewScript.busy)
+        if (ModeSwitch.modeType == 2 && Input.GetMouseButtonDown(0) && dist < 1 && !BuildingPreview.busy)
         {
             if (gameObject.tag == "WaterExtractor")
             {
