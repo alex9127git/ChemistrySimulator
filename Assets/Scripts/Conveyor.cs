@@ -1,110 +1,62 @@
 using UnityEngine;
-using static GlobalVariables;
+using static Global;
 
-public class Conveyor : MonoBehaviour
+public class Conveyor : Building
 {
-    private GameObject input, output;
-    private float inputX, inputY, outputX, outputY;
-    private int indexX, indexY;
-    public Transform H2O;
-    private bool hasItem, clogged;
 
-    public int IndexX { get => indexX; }
-    public int IndexY { get => indexY; }
-    public float OutputX { get => outputX; }
-    public float OutputY { get => outputY; }
-    public float InputX { get => inputX; }
-    public float InputY { get => inputY; }
-    public GameObject Output { get => output; }
-    public bool HasItem { get => hasItem; }
-    public bool Clogged { get => clogged; }
+    private Building next;
+    private Building previous;
+    private float moveSpeed;
+    private Vector3 direction;
+    private Item item;
+
+    public Building Next { get => next; set => next = value; }
+    public Building Previous { get => previous; set => previous = value; }
+    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
+    public Vector3 Direction { get => direction; set => direction = value; }
+    public Item Item { get => item; set => item = value; }
 
     void Start()
     {
-        UpdateConveyor();
+        Initialize();
     }
 
     void Update()
     {
-        UpdateConveyor();
-        int x = (int)transform.position.x;
-        int y = (int)transform.position.y;
-        if (conveyorItems[x, y] == null && input != null && input.tag == "WaterExtractor")
-        {
-            if (inputX < transform.position.x)
-            {
-                conveyorItems[x, y] = Instantiate(H2O, new Vector3(inputX + 0.1f, inputY), Quaternion.identity).gameObject;
-            }
-            else if (inputX > transform.position.x)
-            {
-                conveyorItems[x, y] = Instantiate(H2O, new Vector3(inputX - 0.1f, inputY), Quaternion.identity).gameObject;
-            }
-            else if (inputY < transform.position.y)
-            {
-                conveyorItems[x, y] = Instantiate(H2O, new Vector3(inputX, inputY + 0.1f), Quaternion.identity).gameObject;
-            }
-            else if (inputY > transform.position.y)
-            {
-                conveyorItems[x, y] = Instantiate(H2O, new Vector3(inputX, inputY - 0.1f), Quaternion.identity).gameObject;
-            }
-        }
-        hasItem = conveyorItems[x, y] != null;
-        GameObject nextConveyor = output;
-        clogged = (hasItem && nextConveyor == null) || (hasItem && nextConveyor.GetComponent<Conveyor>().Clogged);
+        ReceiveItems();
     }
 
-    void UpdateConveyor()
+    private void Initialize()
     {
-        string name = gameObject.name;
-        indexX = (int)transform.position.x;
-        indexY = (int)transform.position.y;
-        if (name.StartsWith("Right") && indexX < size - 1)
+        moveSpeed = 1f;
+        Transform transform1 = gameObject.transform;
+        if (next != null)
         {
-            input = buildings[indexX + 1, indexY];
-            inputX = transform.position.x + 0.5f;
-            inputY = transform.position.y;
-        }
-        if (name.StartsWith("Left") && indexX > 0)
+            Transform transform2 = next.gameObject.transform;
+            direction = new Vector3(transform2.position.x - transform1.position.x, transform2.position.y - transform1.position.y);
+        } else
         {
-            input = buildings[indexX - 1, indexY];
-            inputX = transform.position.x - 0.5f;
-            inputY = transform.position.y;
+            direction = new Vector3(0, 0, 0);
         }
-        if (name.StartsWith("Up") && indexY < size - 1)
+    }
+
+    void ReceiveItems()
+    {
+        if (previous.gameObject.tag == "WaterExtractor" && CanTakeItem())
         {
-            input = buildings[indexX, indexY + 1];
-            inputX = transform.position.x;
-            inputY = transform.position.y + 0.5f;
+            item = Instantiate(itemsList[0], transform.position, Quaternion.identity).gameObject.GetComponent<Item>();
+            item.Conveyor = gameObject.GetComponent<Conveyor>();
         }
-        if (name.StartsWith("Down") && indexY > 0)
-        {
-            input = buildings[indexX, indexY - 1];
-            inputX = transform.position.x;
-            inputY = transform.position.y - 0.5f;
-        }
-        if (name.Contains("Right") && !name.StartsWith("Right") && indexX < size - 1)
-        {
-            output = buildings[indexX + 1, indexY];
-            outputX = transform.position.x + 0.5f;
-            outputY = transform.position.y;
-        }
-        if (name.Contains("Left") && !name.StartsWith("Left") && indexX > 0)
-        {
-            output = buildings[indexX - 1, indexY];
-            outputX = transform.position.x - 0.5f;
-            outputY = transform.position.y;
-        }
-        if (name.Contains("Up") && !name.StartsWith("Up") && indexY < size - 1)
-        {
-            output = buildings[indexX, indexY + 1];
-            outputX = transform.position.x;
-            outputY = transform.position.y + 0.5f;
-        }
-        if (name.Contains("Down") && !name.StartsWith("Down") && indexY > 0)
-        {
-            output = buildings[indexX, indexY - 1];
-            outputX = transform.position.x;
-            outputY = transform.position.y - 0.5f;
-        }
+    }
+
+    public bool CanTakeItem()
+    {
+        return item == null;
+    }
+
+    public bool Full()
+    {
+        if (next == null) return !CanTakeItem();
+        return ((Conveyor)next).Full() && !CanTakeItem();
     }
 }
