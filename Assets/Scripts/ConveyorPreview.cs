@@ -1,5 +1,5 @@
 using UnityEngine;
-using static GlobalVariables;
+using static Global;
 
 public class ConveyorPreview : MonoBehaviour
 {
@@ -58,6 +58,7 @@ public class ConveyorPreview : MonoBehaviour
     private void InstantiateConveyorBelt(int[,] path)
     {
         GameObject input = GameObject.FindWithTag("ConveyorInputPreview");
+        GameObject previous = null;
         int inRotation = (int)(input.transform.rotation.eulerAngles.z / 90);
         int outRotation = (int)(transform.rotation.eulerAngles.z / 90);
         for (int i = 0; i < path.Length / 2; i++)
@@ -119,6 +120,38 @@ public class ConveyorPreview : MonoBehaviour
             }
             GameObject obj = Instantiate(conveyorPrefabs[from, to], new Vector3(x, y), Quaternion.identity).gameObject;
             buildings[path[i, 0], path[i, 1]] = obj;
+            if (previous != null)
+            {
+                obj.GetComponent<Conveyor>().Previous = previous.GetComponent<Building>();
+                previous.GetComponent<Conveyor>().Next = obj.GetComponent<Building>();
+            }
+            else
+            {
+                GameObject inObj = null;
+                switch (from)
+                {
+                    case 0:
+                        if (path[i, 0] > 0) inObj = buildings[path[i, 0] + 1, path[i, 1]];
+                        break;
+                    case 1:
+                        if (path[i, 1] > 0) inObj = buildings[path[i, 0], path[i, 1] + 1];
+                        break;
+                    case 2:
+                        if (path[i, 0] < size) inObj = buildings[path[i, 0] - 1, path[i, 1]];
+                        break;
+                    case 3:
+                        if (path[i, 1] < size) inObj = buildings[path[i, 0], path[i, 1] - 1];
+                        break;
+                    default:
+                        inObj = null;
+                        break;
+                }
+                if (inObj != null)
+                {
+                    obj.GetComponent<Conveyor>().Previous = inObj.GetComponent<Building>();
+                }
+            }
+            previous = obj;
         }
         Destroy(input);
     }

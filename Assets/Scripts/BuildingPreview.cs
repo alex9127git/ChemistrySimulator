@@ -1,5 +1,5 @@
 using UnityEngine;
-using static GlobalVariables;
+using static Global;
 
 public class BuildingPreview : MonoBehaviour
 {
