@@ -42,7 +42,7 @@ public class Conveyor : Building
 
     void ReceiveItems()
     {
-        if (previous.gameObject.tag == "WaterExtractor" && CanTakeItem())
+        if (previous != null && previous.gameObject.tag == "WaterExtractor" && CanTakeItem())
         {
             item = Instantiate(itemsList[0], transform.position, Quaternion.identity).gameObject.GetComponent<Item>();
             item.Conveyor = gameObject.GetComponent<Conveyor>();
