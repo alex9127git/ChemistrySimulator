@@ -56,7 +56,12 @@ public class Conveyor : Building
 
     public bool Full()
     {
+<<<<<<< HEAD
         if (next == null) return !CanTakeItem();
         return ((Conveyor)next).Full() && !CanTakeItem();
+=======
+        if (next == null) return CanTakeItem();
+        return ((Conveyor)next).Full() && CanTakeItem();
+>>>>>>> 5f2a5fcff7f44074e8875fb5691ac98d10da4898
     }
 }
