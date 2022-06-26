@@ -17,7 +17,18 @@ public class BuildingPreview : MonoBehaviour
         busy = true;
         if (Input.GetMouseButtonDown(0))
         {
-            if (gameObject.tag == "WaterExtractorPreview")
+            string tag = gameObject.tag;
+            int buildingSize = 0;
+            switch (tag)
+            {
+                case "WaterExtractorPreview":
+                    buildingSize = 3;
+                    break;
+                case "ElectroSeparatorPreview":
+                    buildingSize = 1;
+                    break;
+            }
+            if (buildingSize == 3)
             {
                 int x = (int)transform.position.x;
                 int y = (int)transform.position.y;
@@ -31,6 +42,21 @@ public class BuildingPreview : MonoBehaviour
                         buildings[x, y] = buildings[x, y + 1] = buildings[x, y - 1] = buildings[x - 1, y
                             ] = buildings[x - 1, y + 1] = buildings[x - 1, y - 1] = buildings[x + 1, y
                             ] = buildings[x + 1, y + 1] = buildings[x + 1, y - 1] = obj;
+                        Destroy(gameObject);
+                        busy = false;
+                    }
+                }
+            }
+            else if (buildingSize == 1)
+            {
+                int x = (int)transform.position.x;
+                int y = (int)transform.position.y;
+                if (x >= 0 && x < size && y >= 0 && y < size)
+                {
+                    if (buildings[x, y] == null)
+                    {
+                        GameObject obj = Instantiate(prefab, transform.position, Quaternion.identity).gameObject;
+                        buildings[x, y] = obj;
                         Destroy(gameObject);
                         busy = false;
                     }

@@ -26,6 +26,9 @@ public class Building : MonoBehaviour
                 case "WaterExtractor":
                     buildingSize = 3;
                     break;
+                case "ElectroSeparator":
+                    buildingSize = 1;
+                    break;
             }
             if (buildingSize == 3)
             {
@@ -40,6 +43,20 @@ public class Building : MonoBehaviour
                         buildings[x, y] = buildings[x, y + 1] = buildings[x, y - 1] =
                             buildings[x - 1, y] = buildings[x - 1, y + 1] = buildings[x - 1, y - 1] =
                             buildings[x + 1, y] = buildings[x + 1, y + 1] = buildings[x + 1, y - 1] = null;
+                        Instantiate(preview, transform.position, Quaternion.identity);
+                        Destroy(gameObject);
+                    }
+                }
+            }
+            else if (buildingSize == 1)
+            {
+                int x = (int)transform.position.x;
+                int y = (int)transform.position.y;
+                if (x >= 0 && x < size && y >= 0 && y < size)
+                {
+                    if (buildings[x, y].tag == tag)
+                    {
+                        buildings[x, y] = null;
                         Instantiate(preview, transform.position, Quaternion.identity);
                         Destroy(gameObject);
                     }
@@ -63,6 +80,9 @@ public class Building : MonoBehaviour
                 case "WaterExtractor":
                     buildingSize = 3;
                     break;
+                case "ElectroSeparator":
+                    buildingSize = 1;
+                    break;
             }
             if (buildingSize == 3)
             {
@@ -77,6 +97,19 @@ public class Building : MonoBehaviour
                         buildings[x, y] = buildings[x, y + 1] = buildings[x, y - 1] = buildings[x - 1, y
                                     ] = buildings[x - 1, y + 1] = buildings[x - 1, y - 1] = buildings[x + 1, y
                                     ] = buildings[x + 1, y + 1] = buildings[x + 1, y - 1] = null;
+                        Destroy(gameObject);
+                    }
+                }
+            }
+            else if (buildingSize == 1)
+            {
+                int x = (int)transform.position.x;
+                int y = (int)transform.position.y;
+                if (x >= 0 && x < size && y >= 0 && y < size)
+                {
+                    if (buildings[x, y].tag == tag)
+                    {
+                        buildings[x, y] = null;
                         Destroy(gameObject);
                     }
                 }

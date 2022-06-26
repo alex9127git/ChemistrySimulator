@@ -3,10 +3,7 @@ using UnityEngine;
 public class ButtonsOnClick : MonoBehaviour
 {
     public GameObject buildingUI;
-    public Transform waterExtractorPrefab;
-    public Transform waterExtractorPreview;
-    public Transform conveyorInputPreview;
-    public Transform conveyorOutputPreview;
+    public Transform[] previews;
 
     public void OpenBuildingUI()
     {
@@ -21,15 +18,20 @@ public class ButtonsOnClick : MonoBehaviour
     public void StartBuilding(string building)
     {
         CloseBuildingUI();
+        int previewID = 0;
         switch (building)
         {
             case "WaterExtractor":
-                Instantiate(waterExtractorPreview, new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
+                previewID = 0;
                 break;
             case "Conveyor":
-                Instantiate(conveyorInputPreview, new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
+                previewID = 1;
+                break;
+            case "ElectroSeparator":
+                previewID = 2;
                 break;
         }
+        Instantiate(previews[previewID], new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
     }
 
     void Update()
