@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2550778281108578474}
   - component: {fileID: 1013424236869077914}
-  - component: {fileID: 3664419803683092540}
+  - component: {fileID: 3936467884649620437}
   m_Layer: 0
   m_Name: WaterExtractor
   m_TagString: WaterExtractor
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3664419803683092540
+--- !u!114 &3936467884649620437
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4329657999178964117}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 436c6de1a5120f646af268b4718218f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 322cb8d45dda71a4c8af1cca0d8bd69f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   preview: {fileID: 1793089299039921840, guid: 03abdaa4f298f2340b8e6a50538ae15b, type: 3}

@@ -1,9 +1,7 @@
 using UnityEngine;
-using static Global;
 
 public class Conveyor : Building
 {
-
     private Building next;
     private Building previous;
     private float moveSpeed;
@@ -44,8 +42,12 @@ public class Conveyor : Building
     {
         if (previous != null && previous.gameObject.tag == "WaterExtractor" && CanTakeItem())
         {
-            item = Instantiate(itemsList[0], transform.position, Quaternion.identity).gameObject.GetComponent<Item>();
-            item.Conveyor = gameObject.GetComponent<Conveyor>();
+            item = ((Factory)previous).GiveLastItem();
+            if (item != null)
+            {
+                item.gameObject.SetActive(true);
+                item.Conveyor = gameObject.GetComponent<Conveyor>();
+            }
         }
     }
 

@@ -61,7 +61,7 @@ public class ConveyorPreview : MonoBehaviour
         GameObject previous = null;
         int inRotation = (int)(input.transform.rotation.eulerAngles.z / 90);
         int outRotation = (int)(transform.rotation.eulerAngles.z / 90);
-        for (int i = 0; i < path.Length / 2; i++)
+        for (int i = 0; i < path.Length / 2; i++) // I am dividing by 2 because path.Length would be 2 times larger than the number of conveyor segments in the path
         {
             float x = path[i, 0];
             float y = path[i, 1];
@@ -92,7 +92,7 @@ public class ConveyorPreview : MonoBehaviour
                     }
                 }
             }
-            if (i == (int)(path.Length / 2 - 1))
+            if (i == path.Length / 2 - 1)
             {
                 to = outRotation;
             }
@@ -142,13 +142,34 @@ public class ConveyorPreview : MonoBehaviour
                     case 3:
                         if (path[i, 1] < size) inObj = buildings[path[i, 0], path[i, 1] - 1];
                         break;
-                    default:
-                        inObj = null;
-                        break;
                 }
-                if (inObj != null)
+                if (inObj != null && inObj.GetComponent<MonoBehaviour>() is Factory)
                 {
                     obj.GetComponent<Conveyor>().Previous = inObj.GetComponent<Building>();
+                    inObj.GetComponent<Factory>().Output = obj.GetComponent<Conveyor>();
+                }
+            }
+            if (i == path.Length / 2 - 1)
+            {
+                GameObject outObj = null;
+                switch (to)
+                {
+                    case 0:
+                        if (path[i, 0] > 0) outObj = buildings[path[i, 0] + 1, path[i, 1]];
+                        break;
+                    case 1:
+                        if (path[i, 1] > 0) outObj = buildings[path[i, 0], path[i, 1] + 1];
+                        break;
+                    case 2:
+                        if (path[i, 0] < size) outObj = buildings[path[i, 0] - 1, path[i, 1]];
+                        break;
+                    case 3:
+                        if (path[i, 1] < size) outObj = buildings[path[i, 0], path[i, 1] - 1];
+                        break;
+                }
+                if (outObj != null)
+                {
+                    obj.GetComponent<Conveyor>().Next = outObj.GetComponent<Building>();
                 }
             }
             previous = obj;
