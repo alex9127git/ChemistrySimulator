@@ -4,9 +4,11 @@ public class Item : MonoBehaviour
 {
     private Conveyor conveyor;
     private Conveyor next;
+    private int id;
 
     public Conveyor Conveyor { get => conveyor; set => conveyor = value; }
     public Conveyor Next { get => next; set => next = value; }
+    public int Id { get => id; set => id = value; }
 
     void Start()
     {

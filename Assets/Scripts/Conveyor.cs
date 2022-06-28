@@ -40,7 +40,7 @@ public class Conveyor : Building
 
     void ReceiveItems()
     {
-        if (previous != null && previous.gameObject.tag == "WaterExtractor" && CanTakeItem())
+        if (previous != null && previous is Factory && CanTakeItem())
         {
             item = ((Factory)previous).GiveLastItem();
             if (item != null)
@@ -56,9 +56,21 @@ public class Conveyor : Building
         return item == null;
     }
 
+    public bool HasItem()
+    {
+        return item != null;
+    }
+
     public bool Full()
     {
-        if (next == null) return !CanTakeItem();
+        if (next == null || !(next is Conveyor)) return !CanTakeItem();
         return ((Conveyor)next).Full() && !CanTakeItem();
+    }
+
+    public Item GiveItem()
+    { 
+        Item i = item;
+        item = null;
+        return i;
     }
 }

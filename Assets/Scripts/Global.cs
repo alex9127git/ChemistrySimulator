@@ -3,6 +3,8 @@ using UnityEngine;
 /*
  * Items ID used:
  * 0 - H2O
+ * 1 - Hydrogen
+ * 2 - Oxygen
  */
 public class Global : MonoBehaviour
 {

@@ -167,9 +167,10 @@ public class ConveyorPreview : MonoBehaviour
                         if (path[i, 1] < size) outObj = buildings[path[i, 0], path[i, 1] - 1];
                         break;
                 }
-                if (outObj != null)
+                if (outObj != null && outObj.GetComponent<MonoBehaviour>() is Factory)
                 {
                     obj.GetComponent<Conveyor>().Next = outObj.GetComponent<Building>();
+                    outObj.GetComponent<Factory>().Input = obj.GetComponent<Conveyor>();
                 }
             }
             previous = obj;
