@@ -21,6 +21,7 @@ public class Building : MonoBehaviour
         switch (tag)
         {
             case "WaterExtractor":
+            case "GasExtractor":
                 buildingSize = 3;
                 break;
             case "ElectroSeparator":

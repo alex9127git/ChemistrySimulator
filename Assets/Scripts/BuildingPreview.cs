@@ -22,6 +22,7 @@ public class BuildingPreview : MonoBehaviour
             switch (tag)
             {
                 case "WaterExtractorPreview":
+                case "GasExtractorPreview":
                     buildingSize = 3;
                     break;
                 case "ElectroSeparatorPreview":
