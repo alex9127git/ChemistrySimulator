@@ -33,6 +33,9 @@ public class ButtonsOnClick : MonoBehaviour
             case "GasExtractor":
                 previewID = 3;
                 break;
+            case "ReagentMixer":
+                previewID = 4;
+                break;
         }
         Instantiate(previews[previewID], new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
     }

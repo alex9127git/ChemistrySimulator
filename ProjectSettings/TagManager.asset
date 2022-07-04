@@ -12,6 +12,8 @@ TagManager:
   - Items
   - ElectroSeparator
   - ElectroSeparatorPreview
+  - GasExtractorPreview
+  - GasExtractor
   layers:
   - Default
   - TransparentFX
@@ -51,6 +53,9 @@ TagManager:
     locked: 0
   - name: Objects
     uniqueID: 2210822017
+    locked: 0
+  - name: Items
+    uniqueID: 1282085241
     locked: 0
   - name: Previews
     uniqueID: 1079191653

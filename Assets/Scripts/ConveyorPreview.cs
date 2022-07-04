@@ -146,7 +146,7 @@ public class ConveyorPreview : MonoBehaviour
                 if (inObj != null && inObj.GetComponent<MonoBehaviour>() is Factory)
                 {
                     obj.GetComponent<Conveyor>().Previous = inObj.GetComponent<Building>();
-                    inObj.GetComponent<Factory>().Output = obj.GetComponent<Conveyor>();
+                    inObj.GetComponent<Factory>().Outputs.Add(obj.GetComponent<Conveyor>());
                 }
             }
             if (i == path.Length / 2 - 1)
@@ -170,7 +170,7 @@ public class ConveyorPreview : MonoBehaviour
                 if (outObj != null && outObj.GetComponent<MonoBehaviour>() is Factory)
                 {
                     obj.GetComponent<Conveyor>().Next = outObj.GetComponent<Building>();
-                    outObj.GetComponent<Factory>().Input = obj.GetComponent<Conveyor>();
+                    outObj.GetComponent<Factory>().Inputs.Add(obj.GetComponent<Conveyor>());
                 }
             }
             previous = obj;

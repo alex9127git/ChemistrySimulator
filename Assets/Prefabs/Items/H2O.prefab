@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1408795240981877075}
   - component: {fileID: 5669895406197555801}
-  - component: {fileID: -8568497319863313519}
+  - component: {fileID: 4154888424388611292}
   m_Layer: 0
   m_Name: H2O
   m_TagString: Items
@@ -71,9 +71,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2084145279
-  m_SortingLayer: 1
-  m_SortingOrder: 1
+  m_SortingLayerID: 1282085241
+  m_SortingLayer: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 371efad32a47844429dcaec5e0d5880f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-8568497319863313519
+--- !u!114 &4154888424388611292
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

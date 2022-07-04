@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6184483810487351639}
   - component: {fileID: 3949923126206605678}
-  - component: {fileID: -2360805516247820092}
+  - component: {fileID: 4272965575794850713}
   m_Layer: 0
   m_Name: GasExtractor
   m_TagString: GasExtractor
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-2360805516247820092
+--- !u!114 &4272965575794850713
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6040688566184633670}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 436c6de1a5120f646af268b4718218f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 322cb8d45dda71a4c8af1cca0d8bd69f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   preview: {fileID: 6545909976922567949, guid: 047f8c023fa4eec4694605898a2f68f8, type: 3}
