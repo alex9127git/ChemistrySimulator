@@ -66,22 +66,22 @@ public class Building : MonoBehaviour
         {
             int x = (int)transform.position.x;
             int y = (int)transform.position.y;
-            if (x >= 1 && x < size && y >= 1 && y < size)
+            if (x >= 0 && x < size - 1 && y >= 0 && y < size - 1)
             {
-                if (buildings[x, y].tag == tag && buildings[x, y - 1].tag == tag &&
-                buildings[x - 1, y].tag == tag && buildings[x - 1, y - 1].tag == tag)
+                if (buildings[x, y].tag == tag && buildings[x, y + 1].tag == tag &&
+                buildings[x + 1, y].tag == tag && buildings[x + 1, y + 1].tag == tag)
                 {
                     if (Input.GetMouseButtonDown(0) && dist < 1 && !BuildingPreview.busy)
                     {
                         if (ModeSwitch.modeType == 1)
                         {
-                            buildings[x, y] = buildings[x, y - 1] = buildings[x - 1, y] = buildings[x - 1, y - 1] = null;
+                            buildings[x, y] = buildings[x, y + 1] = buildings[x + 1, y] = buildings[x + 1, y + 1] = null;
                             Instantiate(preview, transform.position, Quaternion.identity);
                             Destroy(gameObject);
                         }
                         else if (ModeSwitch.modeType == 2)
                         {
-                            buildings[x, y] = buildings[x, y - 1] = buildings[x - 1, y] = buildings[x - 1, y - 1] = null;
+                            buildings[x, y] = buildings[x, y + 1] = buildings[x + 1, y] = buildings[x + 1, y + 1] = null;
                             Destroy(gameObject);
                         }
                     }

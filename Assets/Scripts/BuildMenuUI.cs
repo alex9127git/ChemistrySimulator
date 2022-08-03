@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ButtonsOnClick : MonoBehaviour
+public class BuildMenuUI : MonoBehaviour
 {
     public GameObject buildingUI;
     public Transform[] previews;

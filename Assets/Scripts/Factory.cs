@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class Factory : Building
     private Dictionary<int, ArrayList> items = new Dictionary<int, ArrayList>();
     private ArrayList inputIDs = new ArrayList();
     private ArrayList outputIDs = new ArrayList();
+
+    public GameObject factoryUI;
 
     public ArrayList Outputs { get => outputs; set => outputs = value; }
     public ArrayList Inputs { get => inputs; set => inputs = value; }
@@ -56,7 +59,20 @@ public class Factory : Building
     void Update()
     {
         CheckMoveAndDelete();
+        UpdateUI();
         AcceptItems();
+    }
+
+    private void UpdateUI()
+    {
+        Vector3 v = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float distX = transform.position.x - v.x;
+        float distY = transform.position.y - v.y;
+        float dist = Mathf.Sqrt(distX * distX + distY * distY);
+        if (Input.GetMouseButtonDown(0) && dist < 1 && ModeSwitch.modeType == 0)
+        {
+            //Debug.Log("Click registered");
+        }
     }
 
     private void AcceptItems()
