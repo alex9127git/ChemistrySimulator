@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,8 +11,6 @@ public class Factory : Building
     private ArrayList inputIDs = new ArrayList();
     private ArrayList outputIDs = new ArrayList();
 
-    public GameObject factoryUI;
-
     public ArrayList Outputs { get => outputs; set => outputs = value; }
     public ArrayList Inputs { get => inputs; set => inputs = value; }
 
@@ -21,6 +18,7 @@ public class Factory : Building
     {
         InitializeDictionary();
         StartCoroutine(ProduceItems());
+        GetComponentInChildren<FactoryUI>(true).CloseFactoryUI();
     }
 
     private void InitializeDictionary()
@@ -71,7 +69,7 @@ public class Factory : Building
         float dist = Mathf.Sqrt(distX * distX + distY * distY);
         if (Input.GetMouseButtonDown(0) && dist < 1 && ModeSwitch.modeType == 0)
         {
-            //Debug.Log("Click registered");
+            GetComponentInChildren<FactoryUI>(true).OpenFactoryUI(this);
         }
     }
 
