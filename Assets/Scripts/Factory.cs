@@ -23,6 +23,9 @@ public class Factory : Building
 
     private void InitializeDictionary()
     {
+        items.Clear();
+        inputIDs.Clear();
+        outputIDs.Clear();
         switch (tag)
         {
             case "WaterExtractor":
@@ -69,7 +72,7 @@ public class Factory : Building
         float dist = Mathf.Sqrt(distX * distX + distY * distY);
         if (Input.GetMouseButtonDown(0) && dist < 1 && ModeSwitch.modeType == 0)
         {
-            GetComponentInChildren<FactoryUI>(true).OpenFactoryUI(this);
+            GetComponentInChildren<FactoryUI>(true).OpenFactoryUI();
         }
     }
 

@@ -1,11 +1,11 @@
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class ModeSwitch : MonoBehaviour
 {
     string[] modes = {"Spying Mode", "Moving Mode", "Deleting Mode"};
     public static int modeType = 0;
-    public Text textField;
+    public TMP_Text textField;
 
     void Update()
     {
