@@ -6,6 +6,8 @@ public class FactoryUI : MonoBehaviour
     private Factory factoryRef;
     public TMP_Dropdown input;
     public TMP_Dropdown secondaryInput;
+    public TMP_Text inputCoef;
+    public TMP_Text secondInputCoef;
     public TMP_Text output;
     public TMP_Text secondaryOutput;
 
@@ -21,27 +23,40 @@ public class FactoryUI : MonoBehaviour
         switch (factoryRef.gameObject.tag)
         {
             case "ElectroSeparator":
-                if (input.captionText.text == "H2O")
+                if (input.captionText.text == "H<sub>2</sub>O")
                 {
-                    output.text = "2H2";
-                    secondaryOutput.text = "O2";
+                    output.text = "2 H<sub>2</sub>";
+                    secondaryOutput.text = "O<sub>2</sub>";
+                    inputCoef.text = "2";
                 }
                 else
                 {
                     output.text = "---";
                     secondaryOutput.text = "---";
+                    inputCoef.text = "-";
                 }
                 break;
             case "ReagentMixer":
-                if (input.captionText.text == "CH4" && secondaryInput.captionText.text == "H2O")
+                if (input.captionText.text == "CH<sub>4</sub>" && secondaryInput.captionText.text == "H<sub>2</sub>O")
                 {
                     output.text = "CO";
-                    secondaryOutput.text = "3H2";
+                    secondaryOutput.text = "3 H<sub>2</sub>";
+                    inputCoef.text = "1";
+                    secondInputCoef.text = "1";
+                }
+                else if (input.captionText.text == "CH<sub>4</sub>" && secondaryInput.captionText.text == "O<sub>2</sub>")
+                {
+                    output.text = "CO<sub>2</sub>";
+                    secondaryOutput.text = "2 H<sub>2</sub>O";
+                    inputCoef.text = "1";
+                    secondInputCoef.text = "2";
                 }
                 else
                 {
                     output.text = "---";
                     secondaryOutput.text = "---";
+                    inputCoef.text = "-";
+                    secondInputCoef.text = "-";
                 }
                 break;
         }
