@@ -10,10 +10,12 @@ public class Factory : Building
     public ArrayList Inputs { get => inputs; set => inputs = value; }
 
     private ArrayList inputItems = new ArrayList(10);
-    private ArrayList outputItems = new ArrayList(10);
+    private Queue outputItems = new Queue(10);
 
     private const int inputCapacity = 10;
     private const int outputCapacity = 10;
+
+    [SerializeField] private Transform prefab;
 
     [SerializeField] private ReactionObject currentReaction;
 
@@ -77,7 +79,7 @@ public class Factory : Building
                 inputItems = (ArrayList)storage.Clone();
                 foreach (ItemObject output in currentReaction.Outputs)
                 {
-                    outputItems.Add(output);
+                    outputItems.Enqueue(output);
                 }
             }
             yield return new WaitForSeconds(currentReaction.ReactionTime);
@@ -88,9 +90,10 @@ public class Factory : Building
     {
         if (outputItems.Count > 0)
         {
-            ItemObject obj = (ItemObject)outputItems[0];
-            Item item = Instantiate(obj.Prefab, transform.position, Quaternion.identity).GetComponent<Item>();
-            outputItems.RemoveAt(0);
+            ItemObject obj = (ItemObject)outputItems.Peek();
+            Item item = Instantiate(prefab, transform.position, Quaternion.identity).GetComponent<Item>();
+            item.Setup(obj);
+            outputItems.Dequeue();
             return item;
         }
         return null;

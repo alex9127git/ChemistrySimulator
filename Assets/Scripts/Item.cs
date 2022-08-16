@@ -8,7 +8,7 @@ public class Item : MonoBehaviour
 
     public Conveyor Conveyor { get => conveyor; set => conveyor = value; }
     public Conveyor Next { get => next; set => next = value; }
-    public ItemObject ItemObj { get => item; }
+    public ItemObject ItemObj { get => item; set => item = value; }
 
     void Start()
     {
@@ -34,5 +34,11 @@ public class Item : MonoBehaviour
                 UpdateData();
             }
         }
+    }
+
+    public void Setup(ItemObject obj)
+    {
+        gameObject.GetComponent<SpriteRenderer>().sprite = obj.Texture;
+        ItemObj = obj;
     }
 }

@@ -4,26 +4,10 @@ using UnityEngine;
 public class ItemObject : ScriptableObject
 {
     [SerializeField] private string itemName;
-    [SerializeField] private Transform prefabInstance;
+    [SerializeField] private Sprite texture;
 
-    public Transform Prefab { get => prefabInstance; }
+    public Sprite Texture { get => texture; }
     public string ItemName { get => itemName; }
-
-    public override bool Equals(object obj)
-    {
-        if (obj == null || GetType() != obj.GetType())
-        {
-            return false;
-        }
-
-        ItemObject o = (ItemObject)obj;
-        return itemName == o.itemName;
-    }
-
-    public override int GetHashCode()
-    {
-        return base.GetHashCode();
-    }
 
     public override string ToString()
     {
