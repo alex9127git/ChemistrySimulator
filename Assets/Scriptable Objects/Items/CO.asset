@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: CO
   m_EditorClassIdentifier: 
   itemName: CO
+  texture: {fileID: 21300000, guid: fba5f2bed8e91c5498dc31d3dee37ba5, type: 3}

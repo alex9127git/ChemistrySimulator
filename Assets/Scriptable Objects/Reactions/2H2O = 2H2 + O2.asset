@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 818a2b26d6d715847bc332fae312431e, type: 3}
   m_Name: 2H2O = 2H2 + O2
   m_EditorClassIdentifier: 
-  reactionName: Water Separation
+  reactionName: 2H2O = 2H2 + O2
   inputs:
   - {fileID: 11400000, guid: 87ae3ec693fe49248a8f48379f56b053, type: 2}
   - {fileID: 11400000, guid: 87ae3ec693fe49248a8f48379f56b053, type: 2}

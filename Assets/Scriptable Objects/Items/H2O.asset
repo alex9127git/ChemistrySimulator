@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: H2O
   m_EditorClassIdentifier: 
   itemName: H2O
+  texture: {fileID: 21300000, guid: 371efad32a47844429dcaec5e0d5880f, type: 3}

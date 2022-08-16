@@ -16,3 +16,4 @@ MonoBehaviour:
   inputs: []
   outputs:
   - {fileID: 11400000, guid: 87ae3ec693fe49248a8f48379f56b053, type: 2}
+  reactionTime: 1

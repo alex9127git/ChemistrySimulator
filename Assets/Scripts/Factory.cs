@@ -15,7 +15,7 @@ public class Factory : Building
     private const int inputCapacity = 10;
     private const int outputCapacity = 10;
 
-    [SerializeField] private Transform prefab;
+    [SerializeField] private Item prefab;
 
     [SerializeField] private ReactionObject currentReaction;
 
@@ -91,7 +91,7 @@ public class Factory : Building
         if (outputItems.Count > 0)
         {
             ItemObject obj = (ItemObject)outputItems.Peek();
-            Item item = Instantiate(prefab, transform.position, Quaternion.identity).GetComponent<Item>();
+            Item item = Instantiate(prefab, transform.position, Quaternion.identity);
             item.Setup(obj);
             outputItems.Dequeue();
             return item;

@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: CH4
   m_EditorClassIdentifier: 
   itemName: CH4
+  texture: {fileID: 21300000, guid: ff13a70e70766cf4da61df213aa7ee65, type: 3}

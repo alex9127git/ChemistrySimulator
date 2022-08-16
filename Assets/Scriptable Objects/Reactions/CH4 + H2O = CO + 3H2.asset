@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 818a2b26d6d715847bc332fae312431e, type: 3}
   m_Name: CH4 + H2O = CO + 3H2
   m_EditorClassIdentifier: 
-  reactionName: 
-  inputs: []
-  outputs: []
-  reactionTime: 0
+  reactionName: CH4 + H2O = CO + 3H2
+  inputs:
+  - {fileID: 11400000, guid: 23c609cc714231c40b5b53b724481fdb, type: 2}
+  - {fileID: 11400000, guid: 87ae3ec693fe49248a8f48379f56b053, type: 2}
+  outputs:
+  - {fileID: 11400000, guid: 44c1420d3da0c5644acd231acfec3f35, type: 2}
+  - {fileID: 11400000, guid: fc3e96d4c5dfbec45bf2d326cb3a3f81, type: 2}
+  - {fileID: 11400000, guid: fc3e96d4c5dfbec45bf2d326cb3a3f81, type: 2}
+  - {fileID: 11400000, guid: fc3e96d4c5dfbec45bf2d326cb3a3f81, type: 2}
+  reactionTime: 2

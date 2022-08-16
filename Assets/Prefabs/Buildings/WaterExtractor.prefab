@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preview: {fileID: 1793089299039921840, guid: 03abdaa4f298f2340b8e6a50538ae15b, type: 3}
-  prefab: {fileID: 1295384093203278302, guid: dcab936b329113e4bb4380c46f591aed, type: 3}
+  prefab: {fileID: 3341366650990820104, guid: dcab936b329113e4bb4380c46f591aed, type: 3}
   currentReaction: {fileID: 11400000, guid: 6690279ab6d4db1448c8e6822c00f31a, type: 2}
 --- !u!1 &5816382155258429631
 GameObject:
