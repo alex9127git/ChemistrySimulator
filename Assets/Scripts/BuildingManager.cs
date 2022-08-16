@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Global : MonoBehaviour
+public class BuildingManager : MonoBehaviour
 {
     public const int size = 100;
     public static GameObject[,] buildings = new GameObject[size, size];

@@ -10,16 +10,19 @@ public class FactoryUI : MonoBehaviour
     public TMP_Text secondInputCoef;
     public TMP_Text output;
     public TMP_Text secondaryOutput;
+    public ReactionManager reactionManager;
 
     void Start()
     {
         factoryRef = transform.parent.parent.gameObject.GetComponent<Factory>();
         // This is necessary because the parent of the FactoryUI is InternalUI panel. InternalUI panel has a factory prefab as a parent.
         // Accessing parent twice gives us factory reference which we can use later on.
+        reactionManager = GameObject.Find("ReactionManager").GetComponent<ReactionManager>();
     }
 
     void Update()
     {
+        ReactionObject reaction = null;
         switch (factoryRef.gameObject.tag)
         {
             case "ElectroSeparator":
@@ -28,12 +31,14 @@ public class FactoryUI : MonoBehaviour
                     output.text = "2 H<sub>2</sub>";
                     secondaryOutput.text = "O<sub>2</sub>";
                     inputCoef.text = "2";
+                    reaction = reactionManager.FindReactionWithName("2H2O = 2H2 + O2");
                 }
                 else
                 {
                     output.text = "---";
                     secondaryOutput.text = "---";
                     inputCoef.text = "-";
+                    reaction = reactionManager.FindReactionWithName("No Reaction");
                 }
                 break;
             case "ReagentMixer":
@@ -43,6 +48,7 @@ public class FactoryUI : MonoBehaviour
                     secondaryOutput.text = "3 H<sub>2</sub>";
                     inputCoef.text = "1";
                     secondInputCoef.text = "1";
+                    reaction = reactionManager.FindReactionWithName("CH4 + H2O = CO + 3H2");
                 }
                 else if (input.captionText.text == "CH<sub>4</sub>" && secondaryInput.captionText.text == "O<sub>2</sub>")
                 {
@@ -50,6 +56,7 @@ public class FactoryUI : MonoBehaviour
                     secondaryOutput.text = "2 H<sub>2</sub>O";
                     inputCoef.text = "1";
                     secondInputCoef.text = "2";
+                    reaction = reactionManager.FindReactionWithName("CH4 + 2O2 = CO2 + 2H2O");
                 }
                 else
                 {
@@ -57,9 +64,14 @@ public class FactoryUI : MonoBehaviour
                     secondaryOutput.text = "---";
                     inputCoef.text = "-";
                     secondInputCoef.text = "-";
+                    reaction = reactionManager.FindReactionWithName("No Reaction");
                 }
                 break;
+            default:
+                reaction = factoryRef.Reaction;
+                break;
         }
+        factoryRef.Reaction = reaction;
     }
 
     public void OpenFactoryUI()

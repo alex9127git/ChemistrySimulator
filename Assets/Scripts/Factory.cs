@@ -19,9 +19,12 @@ public class Factory : Building
 
     [SerializeField] private ReactionObject currentReaction;
 
+    public ReactionObject Reaction { get => currentReaction; set => currentReaction = value; }
+
     void Start()
     {
         StartCoroutine(ProduceItems());
+        GetComponentInChildren<FactoryUI>(true).CloseFactoryUI();
     }
 
     void Update()
@@ -37,7 +40,7 @@ public class Factory : Building
         float distX = transform.position.x - v.x;
         float distY = transform.position.y - v.y;
         float dist = Mathf.Sqrt(distX * distX + distY * distY);
-        if (Input.GetMouseButtonDown(0) && dist < 1 && ModeSwitch.modeType == 0)
+        if (Input.GetMouseButtonDown(0) && dist < DetermineBuildingSize() * 0.5f - 0.25f && ModeSwitch.modeType == 0)
         {
             GetComponentInChildren<FactoryUI>(true).OpenFactoryUI();
         }

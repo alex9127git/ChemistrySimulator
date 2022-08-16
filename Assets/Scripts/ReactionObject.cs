@@ -12,4 +12,9 @@ public class ReactionObject : ScriptableObject
     public ItemObject[] Inputs { get => inputs; }
     public ItemObject[] Outputs { get => outputs; }
     public float ReactionTime { get => reactionTime; }
+
+    public override string ToString()
+    {
+        return reactionName;
+    }
 }

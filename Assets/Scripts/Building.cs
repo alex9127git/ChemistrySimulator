@@ -1,5 +1,5 @@
 using UnityEngine;
-using static Global;
+using static BuildingManager;
 
 public class Building : MonoBehaviour
 {
@@ -17,20 +17,7 @@ public class Building : MonoBehaviour
         float distY = transform.position.y - v.y;
         float dist = Mathf.Sqrt(distX * distX + distY * distY);
         string tag = gameObject.tag;
-        int buildingSize = 0;
-        switch (tag)
-        {
-            case "WaterExtractor":
-            case "GasExtractor":
-                buildingSize = 3;
-                break;
-            case "ReagentMixer":
-                buildingSize = 2;
-                break;
-            case "ElectroSeparator":
-                buildingSize = 1;
-                break;
-        }
+        int buildingSize = DetermineBuildingSize();
         if (buildingSize == 3)
         {
             int x = (int)transform.position.x;
@@ -113,5 +100,24 @@ public class Building : MonoBehaviour
                 }
             }
         }
+    }
+
+    public int DetermineBuildingSize()
+    {
+        int buildingSize = 0;
+        switch (tag)
+        {
+            case "WaterExtractor":
+            case "GasExtractor":
+                buildingSize = 3;
+                break;
+            case "ReagentMixer":
+                buildingSize = 2;
+                break;
+            case "ElectroSeparator":
+                buildingSize = 1;
+                break;
+        }
+        return buildingSize;
     }
 }
