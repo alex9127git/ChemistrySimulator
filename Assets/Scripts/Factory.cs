@@ -1,71 +1,25 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static Global;
 
 public class Factory : Building
 {
     private ArrayList inputs = new ArrayList();
     private ArrayList outputs = new ArrayList();
-    private Dictionary<int, ArrayList> items = new Dictionary<int, ArrayList>();
-    private ArrayList inputIDs = new ArrayList();
-    private ArrayList outputIDs = new ArrayList();
 
     public ArrayList Outputs { get => outputs; set => outputs = value; }
     public ArrayList Inputs { get => inputs; set => inputs = value; }
 
-    private int in1, in2, out1, out2;
+    private ArrayList inputItems = new ArrayList(10);
+    private ArrayList outputItems = new ArrayList(10);
+
+    private const int inputCapacity = 10;
+    private const int outputCapacity = 10;
+
+    [SerializeField] private ReactionObject currentReaction;
 
     void Start()
     {
-        InitializeDictionary();
         StartCoroutine(ProduceItems());
-        GetComponentInChildren<FactoryUI>(true).CloseFactoryUI();
-    }
-
-    private void InitializeDictionary()
-    {
-        items.Clear();
-        inputIDs.Clear();
-        outputIDs.Clear();
-        switch (tag)
-        {
-            case "WaterExtractor":
-                items.Add(0, new ArrayList());
-                outputIDs.Add(0);
-                out1 = 0;
-                break;
-            case "GasExtractor":
-                items.Add(3, new ArrayList());
-                outputIDs.Add(3);
-                out1 = 3;
-                break;
-            case "ElectroSeparator":
-                items.Add(0, new ArrayList());
-                items.Add(1, new ArrayList());
-                items.Add(2, new ArrayList());
-                inputIDs.Add(0);
-                outputIDs.Add(1);
-                outputIDs.Add(2);
-                in1 = 0;
-                out1 = 1;
-                out2 = 2;
-                break;
-            case "ReagentMixer":
-                items.Add(3, new ArrayList());
-                items.Add(0, new ArrayList());
-                items.Add(4, new ArrayList());
-                items.Add(1, new ArrayList());
-                inputIDs.Add(3);
-                inputIDs.Add(0);
-                outputIDs.Add(4);
-                outputIDs.Add(1);
-                in1 = 3;
-                in2 = 0;
-                out1 = 4;
-                out2 = 1;
-                break;
-        }
     }
 
     void Update()
@@ -89,21 +43,14 @@ public class Factory : Building
 
     private void AcceptItems()
     {
-        foreach (Conveyor input in inputs) { 
-            if (input != null && input.HasItem())
+        foreach (Conveyor input in inputs)
+        {
+            if (input != null && input.HasItem() && inputItems.Count < inputCapacity)
             {
-                Item item = input.Item;
-                int id = item.Id;
-                if (inputIDs.Contains(id))
-                {
-                    if (items[id].Count < 10)
-                    {
-                        item = input.GiveItem();
-                        items[id].Add(item);
-                        item.gameObject.SetActive(false);
-                        item.transform.position = transform.position;
-                    }
-                }
+                Item item = input.GiveItem();
+                ItemObject obj = item.ItemObj;
+                inputItems.Add(obj);
+                Destroy(item.gameObject);
             }
         }
     }
@@ -112,89 +59,39 @@ public class Factory : Building
     {
         while (true)
         {
-            switch (tag)
-            {
-                case "WaterExtractor":
-                    yield return new WaitForSeconds(1);
-                    if (items[out1].Count < 10)
-                    {
-                        Item item = Instantiate(itemsList[out1], transform.position, Quaternion.identity).gameObject.GetComponent<Item>();
-                        item.Id = out1;
-                        items[out1].Add(item);
-                        item.gameObject.SetActive(false);
-                    }
-                    break;
-                case "GasExtractor":
-                    yield return new WaitForSeconds(1);
-                    if (items[out1].Count < 10)
-                    {
-                        Item item = Instantiate(itemsList[out1], transform.position, Quaternion.identity).gameObject.GetComponent<Item>();
-                        item.Id = out1;
-                        items[out1].Add(item);
-                        item.gameObject.SetActive(false);
-                    }
-                    break;
-                case "ElectroSeparator":
-                    yield return new WaitForSeconds(1);
-                    if (items[in1].Count >= 2)
-                    {
-                        if (items[out1].Count < 9 && items[out2].Count < 10)
-                        {
-                            Destroy(((Item)items[in1][0]).gameObject);
-                            Destroy(((Item)items[in1][1]).gameObject);
-                            items[in1].RemoveRange(0, 2);
-                            Item item = Instantiate(itemsList[out1], transform.position, Quaternion.identity).gameObject.GetComponent<Item>();
-                            item.Id = out1;
-                            items[out1].Add(item);
-                            item.gameObject.SetActive(false);
-                            item = Instantiate(itemsList[out1], transform.position, Quaternion.identity).gameObject.GetComponent<Item>();
-                            item.Id = out1;
-                            items[out1].Add(item);
-                            item.gameObject.SetActive(false);
-                            item = Instantiate(itemsList[out2], transform.position, Quaternion.identity).gameObject.GetComponent<Item>();
-                            item.Id = out2;
-                            items[out2].Add(item);
-                            item.gameObject.SetActive(false);
-                        }
-                    }
-                    break;
-                case "ReagentMixer":
-                    yield return new WaitForSeconds(2);
-                    if (items[in1].Count >= 1 && items[in2].Count >= 1)
-                    {
-                        if (items[out1].Count < 10 && items[out2].Count < 8)
-                        {
-                            Destroy(((Item)items[in1][0]).gameObject);
-                            Destroy(((Item)items[in2][0]).gameObject);
-                            items[in1].RemoveAt(0);
-                            items[in2].RemoveAt(0);
-                            Item item = Instantiate(itemsList[out1], transform.position, Quaternion.identity).gameObject.GetComponent<Item>();
-                            item.Id = out1;
-                            items[out1].Add(item);
-                            item.gameObject.SetActive(false);
-                            for (int i = 0; i < 3; i++) {
-                                item = Instantiate(itemsList[out2], transform.position, Quaternion.identity).gameObject.GetComponent<Item>();
-                                item.Id = out2;
-                                items[out2].Add(item);
-                                item.gameObject.SetActive(false);
-                            }
-                        }
-                    }
-                    break;
+            ArrayList storage = (ArrayList)inputItems.Clone();
+            bool canProduce = true;
+            foreach (ItemObject input in currentReaction.Inputs)
+            {              
+                if (storage.Contains(input))
+                {
+                    storage.Remove(input);
+                }
+                else
+                {
+                    canProduce = false;
+                }
             }
+            if (canProduce && outputItems.Count <= outputCapacity - currentReaction.Outputs.Length)
+            {
+                inputItems = (ArrayList)storage.Clone();
+                foreach (ItemObject output in currentReaction.Outputs)
+                {
+                    outputItems.Add(output);
+                }
+            }
+            yield return new WaitForSeconds(currentReaction.ReactionTime);
         }
     }
 
     public Item GiveLastItem()
     {
-        foreach (int id in outputIDs)
+        if (outputItems.Count > 0)
         {
-            if (items[id].Count > 0)
-            {
-                Item item = (Item)items[id][0];
-                items[id].RemoveAt(0);
-                return item;
-            }
+            ItemObject obj = (ItemObject)outputItems[0];
+            Item item = Instantiate(obj.Prefab, transform.position, Quaternion.identity).GetComponent<Item>();
+            outputItems.RemoveAt(0);
+            return item;
         }
         return null;
     }
