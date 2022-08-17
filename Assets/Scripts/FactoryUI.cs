@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System;
 
 public class FactoryUI : MonoBehaviour
 {
@@ -22,6 +23,25 @@ public class FactoryUI : MonoBehaviour
     }
 
     void Update()
+    {
+        UpdateReaction();
+        UpdateText();
+    }
+
+    void UpdateText()
+    {
+        switch (factoryRef.gameObject.tag)
+        {
+            case "WaterExtractor":
+                output.text = String.Format("Extracts Water.\nContains {0} Water out of 10 in the internal storage.", factoryRef.OutputItemsCount());
+                break;
+            case "GasExtractor":
+                output.text = String.Format("Extracts Methane.\nContains {0} Methane out of 10 in the internal storage.", factoryRef.OutputItemsCount());
+                break;
+        }
+    }
+
+    void UpdateReaction()
     {
         ReactionObject reaction = null;
         switch (factoryRef.gameObject.tag)
@@ -82,7 +102,6 @@ public class FactoryUI : MonoBehaviour
 
     public void CloseFactoryUI()
     {
-        Debug.Log("Close");
         gameObject.SetActive(false);
     }
 }

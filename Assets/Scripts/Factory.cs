@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -31,7 +32,14 @@ public class Factory : Building
     {
         CheckMoveAndDelete();
         UpdateUI();
+        UpdateInputsAndOutputs();
         AcceptItems();
+    }
+
+    private void UpdateInputsAndOutputs()
+    {
+        inputs.Remove(null);
+        outputs.Remove(null);
     }
 
     private void UpdateUI()
@@ -40,7 +48,7 @@ public class Factory : Building
         float distX = transform.position.x - v.x;
         float distY = transform.position.y - v.y;
         float dist = Mathf.Sqrt(distX * distX + distY * distY);
-        if (Input.GetMouseButtonDown(0) && dist < DetermineBuildingSize() * 0.5f - 0.25f && ModeSwitch.modeType == 0)
+        if (Input.GetMouseButtonDown(0) && dist < DetermineBuildingSize() * 0.5f - 0.25f && ModeSwitch.modeType == ModeSwitch.spying)
         {
             GetComponentInChildren<FactoryUI>(true).OpenFactoryUI();
         }
@@ -100,5 +108,10 @@ public class Factory : Building
             return item;
         }
         return null;
+    }
+
+    public int OutputItemsCount()
+    {
+        return outputItems.Count;
     }
 }

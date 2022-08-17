@@ -10,7 +10,7 @@ public class Building : MonoBehaviour
         CheckMoveAndDelete();
     }
 
-    protected void CheckMoveAndDelete()
+    protected virtual void CheckMoveAndDelete()
     {
         Vector3 v = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float distX = transform.position.x - v.x;
@@ -30,7 +30,7 @@ public class Building : MonoBehaviour
                 {
                     if (Input.GetMouseButtonDown(0) && dist < 1 && !BuildingPreview.busy)
                     {
-                        if (ModeSwitch.modeType == 1)
+                        if (ModeSwitch.modeType == ModeSwitch.moving)
                         {
                             buildings[x, y] = buildings[x, y + 1] = buildings[x, y - 1] =
                             buildings[x - 1, y] = buildings[x - 1, y + 1] = buildings[x - 1, y - 1] =
@@ -38,7 +38,7 @@ public class Building : MonoBehaviour
                             Instantiate(preview, transform.position, Quaternion.identity);
                             Destroy(gameObject);
                         }
-                        else if (ModeSwitch.modeType == 2)
+                        else if (ModeSwitch.modeType == ModeSwitch.deleting)
                         {
                             buildings[x, y] = buildings[x, y + 1] = buildings[x, y - 1] = buildings[x - 1, y
                                     ] = buildings[x - 1, y + 1] = buildings[x - 1, y - 1] = buildings[x + 1, y
@@ -60,13 +60,13 @@ public class Building : MonoBehaviour
                 {
                     if (Input.GetMouseButtonDown(0) && dist < 1 && !BuildingPreview.busy)
                     {
-                        if (ModeSwitch.modeType == 1)
+                        if (ModeSwitch.modeType == ModeSwitch.moving)
                         {
                             buildings[x, y] = buildings[x, y + 1] = buildings[x + 1, y] = buildings[x + 1, y + 1] = null;
                             Instantiate(preview, transform.position, Quaternion.identity);
                             Destroy(gameObject);
                         }
-                        else if (ModeSwitch.modeType == 2)
+                        else if (ModeSwitch.modeType == ModeSwitch.deleting)
                         {
                             buildings[x, y] = buildings[x, y + 1] = buildings[x + 1, y] = buildings[x + 1, y + 1] = null;
                             Destroy(gameObject);
@@ -85,13 +85,13 @@ public class Building : MonoBehaviour
                 {
                     if (Input.GetMouseButtonDown(0) && dist < 1 && !BuildingPreview.busy)
                     {
-                        if (ModeSwitch.modeType == 1)
+                        if (ModeSwitch.modeType == ModeSwitch.moving)
                         {
                             buildings[x, y] = null;
                             Instantiate(preview, transform.position, Quaternion.identity);
                             Destroy(gameObject);
                         }
-                        else if (ModeSwitch.modeType == 2)
+                        else if (ModeSwitch.modeType == ModeSwitch.deleting)
                         {
                             buildings[x, y] = null;
                             Destroy(gameObject);

@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1079191653
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a42dcd8836a1e2c45a7a60a4b47ebe3f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -99,15 +99,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputPrefab: {fileID: 1881893149507328157, guid: 465f15feaf539f14282fd0bd65c6a9ca, type: 3}
   outputPreview: {fileID: 6525376127122088316}
-  upright: {fileID: 4274472812852300748, guid: a9aa2c890d03e17459b9850d0919fd18, type: 3}
-  upleft: {fileID: 8887832657551671519, guid: c1630bdef5c815a4c833613923cd14b2, type: 3}
-  updown: {fileID: 8198671745747668609, guid: 35c88e94e4968da47a12d09ccf8a9a67, type: 3}
-  leftup: {fileID: 6592622809473620022, guid: 9aa49379a81d02449a31a24ecbb4c643, type: 3}
-  leftright: {fileID: 8803104769863746563, guid: da52c170ba88e8b4ba9f663bad7b8cef, type: 3}
-  leftdown: {fileID: 171813259831286327, guid: 3deb86266191607428b6eb5bcc593e0d, type: 3}
-  rightup: {fileID: 5850061121055691545, guid: c9ec6a5843a6fad47b3a1284990fe873, type: 3}
-  rightleft: {fileID: 7039085239769841507, guid: a082ebaa31086654a98826de8cfe9df6, type: 3}
-  rightdown: {fileID: 6247216075992788834, guid: 749f9abd7250dfb4ead6671865a71874, type: 3}
-  downup: {fileID: 848711272802049278, guid: ecf5eab3cc5805042a33821a812ada67, type: 3}
-  downleft: {fileID: 5938025042720514424, guid: 611ce4ffc4429244c8503e62607304d8, type: 3}
-  downright: {fileID: 3231239650858116642, guid: b4a92488cd18ab34b9c2adb52d533176, type: 3}
+  upright: {fileID: -2450546593766352728, guid: a9aa2c890d03e17459b9850d0919fd18, type: 3}
+  upleft: {fileID: 7915008057666619843, guid: c1630bdef5c815a4c833613923cd14b2, type: 3}
+  updown: {fileID: -4305684492113505636, guid: 35c88e94e4968da47a12d09ccf8a9a67, type: 3}
+  leftup: {fileID: -401436450389529874, guid: 9aa49379a81d02449a31a24ecbb4c643, type: 3}
+  leftright: {fileID: 48277267296567830, guid: da52c170ba88e8b4ba9f663bad7b8cef, type: 3}
+  leftdown: {fileID: -5948648450478321439, guid: 3deb86266191607428b6eb5bcc593e0d, type: 3}
+  rightup: {fileID: 3059025502506909957, guid: c9ec6a5843a6fad47b3a1284990fe873, type: 3}
+  rightleft: {fileID: 7477529089876617780, guid: a082ebaa31086654a98826de8cfe9df6, type: 3}
+  rightdown: {fileID: 3741312208095943852, guid: 749f9abd7250dfb4ead6671865a71874, type: 3}
+  downup: {fileID: 3587166792797273109, guid: ecf5eab3cc5805042a33821a812ada67, type: 3}
+  downleft: {fileID: -4460522559831180643, guid: 611ce4ffc4429244c8503e62607304d8, type: 3}
+  downright: {fileID: 7536554643059993245, guid: b4a92488cd18ab34b9c2adb52d533176, type: 3}

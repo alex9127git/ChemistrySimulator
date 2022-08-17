@@ -6,13 +6,13 @@ public class ConveyorPreview : MonoBehaviour
     public static bool busy;
     public Transform inputPrefab;
     public Transform outputPreview;
-    public Transform upright, upleft, updown, leftup, leftright, leftdown,
+    public Conveyor upright, upleft, updown, leftup, leftright, leftdown,
         rightup, rightleft, rightdown, downup, downleft, downright;
-    public Transform[,] conveyorPrefabs;
+    public Conveyor[,] conveyorPrefabs;
 
     void Start()
     {
-        conveyorPrefabs = new Transform[4, 4]
+        conveyorPrefabs = new Conveyor[4, 4]
         {
             {rightleft, rightup, rightleft, rightdown},
             {upright, updown, upleft, updown},
@@ -24,9 +24,6 @@ public class ConveyorPreview : MonoBehaviour
     void Update()
     {
         Vector3 v = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float distX = transform.position.x - v.x;
-        float distY = transform.position.y - v.y;
-        float dist = Mathf.Sqrt(distX * distX + distY * distY);
         v.x = (int)v.x;
         v.y = (int)v.y;
         v.z = 0;
@@ -58,13 +55,13 @@ public class ConveyorPreview : MonoBehaviour
     private void InstantiateConveyorBelt(int[,] path)
     {
         GameObject input = GameObject.FindWithTag("ConveyorInputPreview");
-        GameObject previous = null;
+        Conveyor previous = null;
         int inRotation = (int)(input.transform.rotation.eulerAngles.z / 90);
         int outRotation = (int)(transform.rotation.eulerAngles.z / 90);
         for (int i = 0; i < path.Length / 2; i++) // I am dividing by 2 because path.Length would be 2 times larger than the number of conveyor segments in the path
         {
-            float x = path[i, 0];
-            float y = path[i, 1];
+            int x = path[i, 0];
+            int y = path[i, 1];
             int from = 0, to = 0;
             if (i == 0)
             {
@@ -118,35 +115,72 @@ public class ConveyorPreview : MonoBehaviour
                     }
                 }
             }
-            GameObject obj = Instantiate(conveyorPrefabs[from, to], new Vector3(x, y), Quaternion.identity).gameObject;
-            buildings[path[i, 0], path[i, 1]] = obj;
+            Conveyor conv = Instantiate(conveyorPrefabs[from, to], new Vector3(x, y), Quaternion.identity);
+            buildings[path[i, 0], path[i, 1]] = conv.gameObject;
+            int inX = 0, inY = 0;
+            switch (from)
+            {
+                case 0: inX = x + 1; inY = y; break;
+                case 1: inX = x; inY = y + 1; break;
+                case 2: inX = x - 1; inY = y; break;
+                case 3: inX = x; inY = y - 1; break;
+            }
+            int outX = 0, outY = 0;
+            switch (to)
+            {
+                case 0: outX = x + 1; outY = y; break;
+                case 1: outX = x; outY = y + 1; break;
+                case 2: outX = x - 1; outY = y; break;
+                case 3: outX = x; outY = y - 1; break;
+            }
+            conv.InX = inX;
+            conv.InY = inY;
+            conv.OutX = outX;
+            conv.OutY = outY;
             if (previous != null)
             {
-                obj.GetComponent<Conveyor>().Previous = previous.GetComponent<Building>();
-                previous.GetComponent<Conveyor>().Next = obj.GetComponent<Building>();
+                conv.Previous = previous;
+                previous.Next = conv;
             }
             else
             {
+                
                 GameObject inObj = null;
                 switch (from)
                 {
                     case 0:
                         if (path[i, 0] > 0) inObj = buildings[path[i, 0] + 1, path[i, 1]];
+                        inX = x + 1;
+                        inY = y;
                         break;
                     case 1:
                         if (path[i, 1] > 0) inObj = buildings[path[i, 0], path[i, 1] + 1];
+                        inX = x;
+                        inY = y + 1;
                         break;
                     case 2:
                         if (path[i, 0] < size) inObj = buildings[path[i, 0] - 1, path[i, 1]];
+                        inX = x - 1;
+                        inY = y;
                         break;
                     case 3:
                         if (path[i, 1] < size) inObj = buildings[path[i, 0], path[i, 1] - 1];
+                        inX = x;
+                        inY = y - 1;
                         break;
                 }
-                if (inObj != null && inObj.GetComponent<MonoBehaviour>() is Factory)
+                if (inObj != null)
                 {
-                    obj.GetComponent<Conveyor>().Previous = inObj.GetComponent<Building>();
-                    inObj.GetComponent<Factory>().Outputs.Add(obj.GetComponent<Conveyor>());
+                    if (inObj.GetComponent<Building>() is Factory)
+                    {
+                        conv.Previous = inObj.GetComponent<Building>();
+                        inObj.GetComponent<Factory>().Outputs.Add(conv);
+                    }
+                    else if (inObj.GetComponent<Building>() is Conveyor)
+                    {
+                        conv.Previous = inObj.GetComponent<Building>();
+                        inObj.GetComponent<Conveyor>().Next = conv;
+                    }
                 }
             }
             if (i == path.Length / 2 - 1)
@@ -156,24 +190,40 @@ public class ConveyorPreview : MonoBehaviour
                 {
                     case 0:
                         if (path[i, 0] > 0) outObj = buildings[path[i, 0] + 1, path[i, 1]];
+                        outX = x + 1;
+                        outY = y;
                         break;
                     case 1:
                         if (path[i, 1] > 0) outObj = buildings[path[i, 0], path[i, 1] + 1];
+                        outX = x;
+                        outY = y + 1;
                         break;
                     case 2:
                         if (path[i, 0] < size) outObj = buildings[path[i, 0] - 1, path[i, 1]];
+                        outX = x - 1;
+                        outY = y;
                         break;
                     case 3:
                         if (path[i, 1] < size) outObj = buildings[path[i, 0], path[i, 1] - 1];
+                        outX = x;
+                        outY = y - 1;
                         break;
                 }
-                if (outObj != null && outObj.GetComponent<MonoBehaviour>() is Factory)
+                if (outObj != null)
                 {
-                    obj.GetComponent<Conveyor>().Next = outObj.GetComponent<Building>();
-                    outObj.GetComponent<Factory>().Inputs.Add(obj.GetComponent<Conveyor>());
+                    if (outObj.GetComponent<MonoBehaviour>() is Factory)
+                    {
+                        conv.Next = outObj.GetComponent<Building>();
+                        outObj.GetComponent<Factory>().Inputs.Add(conv);
+                    }
+                    else if (outObj.GetComponent<MonoBehaviour>() is Conveyor)
+                    {
+                        conv.Previous = outObj.GetComponent<Building>();
+                        outObj.GetComponent<Conveyor>().Next = conv;
+                    }
                 }
             }
-            previous = obj;
+            previous = conv;
         }
         Destroy(input);
     }
