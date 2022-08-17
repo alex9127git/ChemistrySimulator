@@ -10,7 +10,8 @@ public class FactoryUI : MonoBehaviour
     public TMP_Text secondInputCoef;
     public TMP_Text output;
     public TMP_Text secondaryOutput;
-    public ReactionManager reactionManager;
+
+    private ReactionManager reactionManager;
 
     void Start()
     {
@@ -81,6 +82,7 @@ public class FactoryUI : MonoBehaviour
 
     public void CloseFactoryUI()
     {
+        Debug.Log("Close");
         gameObject.SetActive(false);
     }
 }
