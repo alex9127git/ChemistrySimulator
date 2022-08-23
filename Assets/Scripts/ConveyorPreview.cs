@@ -116,7 +116,7 @@ public class ConveyorPreview : MonoBehaviour
                 }
             }
             Conveyor conv = Instantiate(conveyorPrefabs[from, to], new Vector3(x, y), Quaternion.identity);
-            buildings[path[i, 0], path[i, 1]] = conv.gameObject;
+            buildings[path[i, 0], path[i, 1]] = conv;
             int inX = 0, inY = 0;
             switch (from)
             {
@@ -133,19 +133,17 @@ public class ConveyorPreview : MonoBehaviour
                 case 2: outX = x - 1; outY = y; break;
                 case 3: outX = x; outY = y - 1; break;
             }
-            conv.InX = inX;
-            conv.InY = inY;
-            conv.OutX = outX;
-            conv.OutY = outY;
+            conv.InC = new Coordinate(inX, inY);
+            conv.OutC = new Coordinate(outX, outY);
             if (previous != null)
             {
-                conv.Previous = previous;
-                previous.Next = conv;
+                conv.Input = previous;
+                previous.Output = conv;
             }
             else
             {
                 
-                GameObject inObj = null;
+                Building inObj = null;
                 switch (from)
                 {
                     case 0:
@@ -173,19 +171,19 @@ public class ConveyorPreview : MonoBehaviour
                 {
                     if (inObj.GetComponent<Building>() is Factory)
                     {
-                        conv.Previous = inObj.GetComponent<Building>();
-                        inObj.GetComponent<Factory>().Outputs.Add(conv);
+                        conv.Input = inObj;
+                        ((Factory)inObj).Outputs.Add(conv);
                     }
                     else if (inObj.GetComponent<Building>() is Conveyor)
                     {
-                        conv.Previous = inObj.GetComponent<Building>();
-                        inObj.GetComponent<Conveyor>().Next = conv;
+                        conv.Input = inObj;
+                        ((Conveyor)inObj).Output = conv;
                     }
                 }
             }
             if (i == path.Length / 2 - 1)
             {
-                GameObject outObj = null;
+                Building outObj = null;
                 switch (to)
                 {
                     case 0:
@@ -213,13 +211,13 @@ public class ConveyorPreview : MonoBehaviour
                 {
                     if (outObj.GetComponent<MonoBehaviour>() is Factory)
                     {
-                        conv.Next = outObj.GetComponent<Building>();
-                        outObj.GetComponent<Factory>().Inputs.Add(conv);
+                        conv.Output = outObj;
+                        ((Factory)outObj).Inputs.Add(conv);
                     }
                     else if (outObj.GetComponent<MonoBehaviour>() is Conveyor)
                     {
-                        conv.Previous = outObj.GetComponent<Building>();
-                        outObj.GetComponent<Conveyor>().Next = conv;
+                        conv.Input = outObj;
+                        ((Conveyor)outObj).Output = conv;
                     }
                 }
             }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class BuildingManager : MonoBehaviour
 {
     public const int size = 100;
-    public static GameObject[,] buildings = new GameObject[size, size];
+    public static Building[,] buildings = new Building[size, size];
 
     void Start()
     {
@@ -14,5 +14,25 @@ public class BuildingManager : MonoBehaviour
                 buildings[i, j] = null;
             }
         }
+    }
+
+    public static int DetermineBuildingSize(string tag)
+    {
+        int buildingSize = 0;
+        switch (tag)
+        {
+            case "WaterExtractor":
+            case "GasExtractor":
+                buildingSize = 3;
+                break;
+            case "ReagentMixer":
+                buildingSize = 2;
+                break;
+            case "ElectroSeparator":
+            case "Sorter":
+                buildingSize = 1;
+                break;
+        }
+        return buildingSize;
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     private Conveyor conveyor;
-    private Conveyor next;
+    [SerializeField] private Conveyor next;
     [SerializeField] private ItemObject item;
 
     public Conveyor Conveyor { get => conveyor; set => conveyor = value; }
@@ -18,7 +18,7 @@ public class Item : MonoBehaviour
     private void UpdateData()
     {
         transform.position = Conveyor.transform.position;
-        if (conveyor.Next is Conveyor) next = (Conveyor) conveyor.Next;
+        if (conveyor.Output is Conveyor) next = (Conveyor) conveyor.Output;
     }
 
     void LateUpdate()

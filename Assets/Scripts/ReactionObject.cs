@@ -17,4 +17,14 @@ public class ReactionObject : ScriptableObject
     {
         return reactionName;
     }
+
+    public int GetInputQuantity(ItemObject input)
+    {
+        int q = 0;
+        foreach (ItemObject obj in inputs)
+        {
+            if (obj == input) q++;
+        }
+        return q;
+    }
 }

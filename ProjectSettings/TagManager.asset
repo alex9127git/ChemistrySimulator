@@ -6,17 +6,13 @@ TagManager:
   tags:
   - WaterExtractor
   - Conveyor
-  - WaterExtractorPreview
   - ConveyorInputPreview
   - ConveyorOutputPreview
   - Items
   - ElectroSeparator
-  - ElectroSeparatorPreview
-  - GasExtractorPreview
   - GasExtractor
-  - ReagentMixerPreview
   - ReagentMixer
-  - FactoryUI
+  - Sorter
   layers:
   - Default
   - TransparentFX

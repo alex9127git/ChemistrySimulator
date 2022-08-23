@@ -1,6 +1,7 @@
-using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using static BuildingManager;
 
 public class Factory : Building
 {
@@ -10,7 +11,7 @@ public class Factory : Building
     public ArrayList Outputs { get => outputs; set => outputs = value; }
     public ArrayList Inputs { get => inputs; set => inputs = value; }
 
-    private ArrayList inputItems = new ArrayList(10);
+    private Dictionary<ItemObject, int> inputItems = new Dictionary<ItemObject, int>();
     private Queue outputItems = new Queue(10);
 
     private const int inputCapacity = 10;
@@ -48,7 +49,7 @@ public class Factory : Building
         float distX = transform.position.x - v.x;
         float distY = transform.position.y - v.y;
         float dist = Mathf.Sqrt(distX * distX + distY * distY);
-        if (Input.GetMouseButtonDown(0) && dist < DetermineBuildingSize() * 0.5f - 0.25f && ModeSwitch.modeType == ModeSwitch.spying)
+        if (Input.GetMouseButtonDown(0) && dist < DetermineBuildingSize(gameObject.tag) * 0.5f - 0.25f && ModeSwitch.modeType == ModeSwitch.spying)
         {
             GetComponentInChildren<FactoryUI>(true).OpenFactoryUI();
         }
@@ -58,12 +59,19 @@ public class Factory : Building
     {
         foreach (Conveyor input in inputs)
         {
-            if (input != null && input.HasItem() && inputItems.Count < inputCapacity)
+            if (input != null && input.HasItem())
             {
                 Item item = input.GiveItem();
                 ItemObject obj = item.ItemObj;
-                inputItems.Add(obj);
-                Destroy(item.gameObject);
+                if (!inputItems.ContainsKey(obj))
+                {
+                    inputItems[obj] = 0;
+                }
+                if (inputItems[obj] < inputCapacity)
+                {
+                    inputItems[obj] += 1;
+                    Destroy(item.gameObject);
+                }
             }
         }
     }
@@ -72,13 +80,14 @@ public class Factory : Building
     {
         while (true)
         {
-            ArrayList storage = (ArrayList)inputItems.Clone();
+            Dictionary<ItemObject, int> storage = CloneDictoinary(inputItems);
             bool canProduce = true;
             foreach (ItemObject input in currentReaction.Inputs)
-            {              
-                if (storage.Contains(input))
+            {
+                int inputQuantity = currentReaction.GetInputQuantity(input);
+                if (storage.ContainsKey(input) && storage[input] >= inputQuantity)
                 {
-                    storage.Remove(input);
+                    storage[input] -= inputQuantity;
                 }
                 else
                 {
@@ -87,7 +96,7 @@ public class Factory : Building
             }
             if (canProduce && outputItems.Count <= outputCapacity - currentReaction.Outputs.Length)
             {
-                inputItems = (ArrayList)storage.Clone();
+                inputItems = CloneDictoinary(storage);
                 foreach (ItemObject output in currentReaction.Outputs)
                 {
                     outputItems.Enqueue(output);
@@ -113,5 +122,15 @@ public class Factory : Building
     public int OutputItemsCount()
     {
         return outputItems.Count;
+    }
+
+    private Dictionary<ItemObject, int> CloneDictoinary(Dictionary<ItemObject, int> dict)
+    {
+        Dictionary<ItemObject, int> cloned = new Dictionary<ItemObject, int>();
+        foreach (ItemObject itemObj in dict.Keys)
+        {
+            cloned[itemObj] = dict[itemObj];
+        }
+        return cloned;
     }
 }

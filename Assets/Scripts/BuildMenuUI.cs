@@ -36,6 +36,9 @@ public class BuildMenuUI : MonoBehaviour
             case "ReagentMixer":
                 previewID = 4;
                 break;
+            case "Sorter":
+                previewID = 5;
+                break;
         }
         Instantiate(previews[previewID], new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
     }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3018729494884573698}
   m_Layer: 0
   m_Name: WaterExtractorPreview
-  m_TagString: WaterExtractorPreview
+  m_TagString: WaterExtractor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 1079191653
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0c01672edbda8484d8572a7b53b82c8f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 07ae79087228b3c4288d0b89b7eb7158, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,4 +97,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b9acb6a2cd80449bceb1ac9e73da5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2550778281108578474, guid: 73aaffbdb53aacd4c994eecf7ddea4eb, type: 3}
+  prefab: {fileID: 3936467884649620437, guid: 73aaffbdb53aacd4c994eecf7ddea4eb, type: 3}

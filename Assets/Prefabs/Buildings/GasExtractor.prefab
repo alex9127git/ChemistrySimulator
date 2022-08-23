@@ -623,7 +623,7 @@ GameObject:
   - component: {fileID: 6899165939213782948}
   m_Layer: 5
   m_Name: FactoryUI
-  m_TagString: FactoryUI
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

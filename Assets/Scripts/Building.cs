@@ -17,16 +17,16 @@ public class Building : MonoBehaviour
         float distY = transform.position.y - v.y;
         float dist = Mathf.Sqrt(distX * distX + distY * distY);
         string tag = gameObject.tag;
-        int buildingSize = DetermineBuildingSize();
+        int buildingSize = DetermineBuildingSize(tag);
         if (buildingSize == 3)
         {
             int x = (int)transform.position.x;
             int y = (int)transform.position.y;
             if (x >= 1 && x < size - 1 && y >= 1 && y < size - 1)
             {
-                if (buildings[x, y].tag == tag && buildings[x, y + 1].tag == tag && buildings[x, y - 1].tag == tag &&
-                buildings[x - 1, y].tag == tag && buildings[x - 1, y + 1].tag == tag && buildings[x - 1, y - 1].tag == tag &&
-                buildings[x + 1, y].tag == tag && buildings[x + 1, y + 1].tag == tag && buildings[x + 1, y - 1].tag == tag)
+                if (buildings[x, y].gameObject.tag == tag && buildings[x, y + 1].gameObject.tag == tag && buildings[x, y - 1].gameObject.tag == tag &&
+                buildings[x - 1, y].gameObject.tag == tag && buildings[x - 1, y + 1].gameObject.tag == tag && buildings[x - 1, y - 1].gameObject.tag == tag &&
+                buildings[x + 1, y].gameObject.tag == tag && buildings[x + 1, y + 1].gameObject.tag == tag && buildings[x + 1, y - 1].gameObject.tag == tag)
                 {
                     if (Input.GetMouseButtonDown(0) && dist < 1 && !BuildingPreview.busy)
                     {
@@ -55,8 +55,8 @@ public class Building : MonoBehaviour
             int y = (int)transform.position.y;
             if (x >= 0 && x < size - 1 && y >= 0 && y < size - 1)
             {
-                if (buildings[x, y].tag == tag && buildings[x, y + 1].tag == tag &&
-                buildings[x + 1, y].tag == tag && buildings[x + 1, y + 1].tag == tag)
+                if (buildings[x, y].gameObject.tag == tag && buildings[x, y + 1].gameObject.tag == tag &&
+                buildings[x + 1, y].gameObject.tag == tag && buildings[x + 1, y + 1].gameObject.tag == tag)
                 {
                     if (Input.GetMouseButtonDown(0) && dist < 1 && !BuildingPreview.busy)
                     {
@@ -81,7 +81,7 @@ public class Building : MonoBehaviour
             int y = (int)transform.position.y;
             if (x >= 0 && x < size && y >= 0 && y < size)
             {
-                if (buildings[x, y].tag == tag)
+                if (buildings[x, y].gameObject.tag == tag)
                 {
                     if (Input.GetMouseButtonDown(0) && dist < 1 && !BuildingPreview.busy)
                     {
@@ -100,24 +100,5 @@ public class Building : MonoBehaviour
                 }
             }
         }
-    }
-
-    public int DetermineBuildingSize()
-    {
-        int buildingSize = 0;
-        switch (tag)
-        {
-            case "WaterExtractor":
-            case "GasExtractor":
-                buildingSize = 3;
-                break;
-            case "ReagentMixer":
-                buildingSize = 2;
-                break;
-            case "ElectroSeparator":
-                buildingSize = 1;
-                break;
-        }
-        return buildingSize;
     }
 }

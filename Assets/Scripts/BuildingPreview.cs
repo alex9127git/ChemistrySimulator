@@ -4,25 +4,12 @@ using static BuildingManager;
 public class BuildingPreview : MonoBehaviour
 {
     public static bool busy;
-    public Transform prefab;
+    public Building prefab;
 
     void Update()
     {
         string tag = gameObject.tag;
-        int buildingSize = 0;
-        switch (tag)
-        {
-            case "WaterExtractorPreview":
-            case "GasExtractorPreview":
-                buildingSize = 3;
-                break;
-            case "ReagentMixerPreview":
-                buildingSize = 2;
-                break;
-            case "ElectroSeparatorPreview":
-                buildingSize = 1;
-                break;
-        }
+        int buildingSize = DetermineBuildingSize(tag);
         Vector3 v = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         v.x = (int)v.x;
         v.y = (int)v.y;
@@ -30,7 +17,6 @@ public class BuildingPreview : MonoBehaviour
         v.y += (buildingSize % 2 == 1 ? 0 : 1) * 0.5f;
         v.z = 0;
         transform.position = v;
-        transform.rotation = Quaternion.identity;
         busy = true;
         if (Input.GetMouseButtonDown(0))
         {
@@ -44,7 +30,7 @@ public class BuildingPreview : MonoBehaviour
                     buildings[x - 1, y] == null && buildings[x - 1, y + 1] == null && buildings[x - 1, y - 1] == null &&
                     buildings[x + 1, y] == null && buildings[x + 1, y + 1] == null && buildings[x + 1, y - 1] == null)
                     {
-                        GameObject obj = Instantiate(prefab, transform.position, Quaternion.identity).gameObject;
+                        Building obj = Instantiate(prefab, transform.position, transform.rotation);
                         buildings[x, y] = buildings[x, y + 1] = buildings[x, y - 1] = buildings[x - 1, y
                             ] = buildings[x - 1, y + 1] = buildings[x - 1, y - 1] = buildings[x + 1, y
                             ] = buildings[x + 1, y + 1] = buildings[x + 1, y - 1] = obj;
@@ -62,7 +48,7 @@ public class BuildingPreview : MonoBehaviour
                     if (buildings[x, y] == null && buildings[x, y + 1] == null &&
                     buildings[x + 1, y] == null && buildings[x + 1, y + 1] == null)
                     {
-                        GameObject obj = Instantiate(prefab, transform.position, Quaternion.identity).gameObject;
+                        Building obj = Instantiate(prefab, transform.position, transform.rotation);
                         buildings[x, y] = buildings[x, y + 1] = buildings[x + 1, y] = buildings[x + 1, y + 1] = obj;
                         Destroy(gameObject);
                         busy = false;
@@ -73,16 +59,66 @@ public class BuildingPreview : MonoBehaviour
             {
                 int x = (int)transform.position.x;
                 int y = (int)transform.position.y;
-                if (x >= 0 && x < size && y >= 0 && y < size)
+                if (tag == "Sorter")
+                {
+                    if (buildings[x, y] is Conveyor)
+                    {
+                        Sorter obj = (Sorter)Instantiate(prefab, transform.position, transform.rotation);
+                        Destroy(buildings[x, y].gameObject);
+                        buildings[x, y] = obj;
+                        int rotation = (int)(transform.rotation.eulerAngles.z / 90);
+                        Coordinate right = new Coordinate(x + 1, y);
+                        Coordinate left = new Coordinate(x - 1, y);
+                        Coordinate up = new Coordinate(x, y + 1);
+                        Coordinate down = new Coordinate(x, y - 1);
+                        switch (rotation)
+                        {
+                            case 0:
+                                obj.InC = left;
+                                obj.FilterOutC = right;
+                                obj.RestOutC1 = up;
+                                obj.RestOutC2 = down;
+                                break;
+                            case 1:
+                                obj.InC = down;
+                                obj.FilterOutC = up;
+                                obj.RestOutC1 = left;
+                                obj.RestOutC2 = right;
+                                break;
+                            case 2:
+                                obj.InC = right;
+                                obj.FilterOutC = left;
+                                obj.RestOutC1 = down;
+                                obj.RestOutC2 = up;
+                                break;
+                            case 3:
+                                obj.InC = up;
+                                obj.FilterOutC = down;
+                                obj.RestOutC1 = right;
+                                obj.RestOutC2 = left;
+                                break;
+                        }
+                    }
+                    Destroy(gameObject);
+                    busy = false;
+                }
+                else if (x >= 0 && x < size && y >= 0 && y < size)
                 {
                     if (buildings[x, y] == null)
                     {
-                        GameObject obj = Instantiate(prefab, transform.position, Quaternion.identity).gameObject;
+                        Building obj = Instantiate(prefab, transform.position, transform.rotation);
                         buildings[x, y] = obj;
                         Destroy(gameObject);
                         busy = false;
                     }
                 }
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (tag == "Sorter")
+            {
+                transform.Rotate(new Vector3(0, 0, -90));
             }
         }
     }

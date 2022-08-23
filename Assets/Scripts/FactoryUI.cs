@@ -33,10 +33,10 @@ public class FactoryUI : MonoBehaviour
         switch (factoryRef.gameObject.tag)
         {
             case "WaterExtractor":
-                output.text = String.Format("Extracts Water.\nContains {0} Water out of 10 in the internal storage.", factoryRef.OutputItemsCount());
+                output.text = string.Format("Extracts Water.\nContains {0} Water out of 10 in the internal storage.", factoryRef.OutputItemsCount());
                 break;
             case "GasExtractor":
-                output.text = String.Format("Extracts Methane.\nContains {0} Methane out of 10 in the internal storage.", factoryRef.OutputItemsCount());
+                output.text = string.Format("Extracts Methane.\nContains {0} Methane out of 10 in the internal storage.", factoryRef.OutputItemsCount());
                 break;
         }
     }

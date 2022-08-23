@@ -3,58 +3,52 @@ using static BuildingManager;
 
 public class Conveyor : Building
 {
-    private Building next;
-    private Building previous;
-    private float moveSpeed;
-    private Vector3 direction;
-    private Item item;
-    private int inX, inY, outX, outY;
+    protected Building output;
+    protected Building input;
+    protected float moveSpeed;
+    protected Vector3 direction;
+    protected Item item;
+    protected Coordinate inC, outC;
 
-    public Building Next { get => next; set => next = value; }
-    public Building Previous { get => previous; set => previous = value; }
+    public Building Output { get => output; set => output = value; }
+    public Building Input { get => input; set => input = value; }
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
     public Vector3 Direction { get => direction; set => direction = value; }
     public Item Item { get => item; set => item = value; }
-    public int InX { get => inX; set => inX = value; }
-    public int InY { get => inY; set => inY = value; }
-    public int OutX { get => outX; set => outX = value; }
-    public int OutY { get => outY; set => outY = value; }
+    public Coordinate InC { get => inC; set => inC = value; }
+    public Coordinate OutC { get => outC; set => outC = value; }
 
     private bool deleted = false;
-
-    void Start()
-    {
-    }
 
     void Update()
     {
         CheckMoveAndDelete();
+        UpdateInputAndOutput();
         UpdateDirection();
         ReceiveItems();
-        UpdateInputAndOutput();
     }
 
-    void UpdateInputAndOutput()
+    protected virtual void UpdateInputAndOutput()
     {
-        previous = buildings[inX, inY] != null ? buildings[inX, inY].GetComponent<Building>() : null;
-        next = buildings[outX, outY] != null ? buildings[outX, outY].GetComponent<Building>() : null;
-        if (previous != null && previous is Factory)
+        input = buildings[inC.X, inC.Y];
+        output = buildings[outC.X, outC.Y];
+        if (input != null && input is Factory)
         {
-            ((Factory)previous).Outputs.Add(this);
+            ((Factory)input).Outputs.Add(this);
         }
-        if (previous != null && next is Factory)
+        if (output != null && output is Factory)
         {
-            ((Factory)next).Inputs.Add(this);
+            ((Factory)output).Inputs.Add(this);
         }
     }
 
     protected override void CheckMoveAndDelete()
     {
-        Vector3 v = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 v = Camera.main.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
         float distX = transform.position.x - v.x;
         float distY = transform.position.y - v.y;
         float dist = Mathf.Sqrt(distX * distX + distY * distY);
-        if (dist < 0.25 && Input.GetMouseButtonDown(0) && ModeSwitch.modeType == ModeSwitch.deleting)
+        if (dist < 0.25 && UnityEngine.Input.GetMouseButtonDown(0) && ModeSwitch.modeType == ModeSwitch.deleting)
         {
             RecursiveDelete();
         }
@@ -65,18 +59,18 @@ public class Conveyor : Building
         if (!deleted)
         {
             deleted = true;
-            if (previous != null)
+            if (input != null)
             {
-                if (previous is Conveyor)
+                if (input is Conveyor)
                 {
-                    ((Conveyor)previous).RecursiveDelete();
+                    ((Conveyor)input).RecursiveDelete();
                 }
             }
-            if (next != null)
+            if (output != null)
             {
-                if (next is Conveyor)
+                if (output is Conveyor)
                 {
-                    ((Conveyor)next).RecursiveDelete();
+                    ((Conveyor)output).RecursiveDelete();
                 }
             }
             if (item != null) Destroy(item.gameObject);
@@ -84,13 +78,13 @@ public class Conveyor : Building
         }
     }
 
-    private void UpdateDirection()
+    protected virtual void UpdateDirection()
     {
         moveSpeed = 1f;
         Transform transform1 = gameObject.transform;
-        if (next != null)
+        if (output != null)
         {
-            Transform transform2 = next.gameObject.transform;
+            Transform transform2 = output.gameObject.transform;
             direction = new Vector3(transform2.position.x - transform1.position.x, transform2.position.y - transform1.position.y);
         }
         else
@@ -99,11 +93,11 @@ public class Conveyor : Building
         }
     }
 
-    void ReceiveItems()
+    protected virtual void ReceiveItems()
     {
-        if (previous != null && previous is Factory && CanTakeItem())
+        if (input != null && input is Factory && CanTakeItem())
         {
-            item = ((Factory)previous).GiveLastItem();
+            item = ((Factory)input).GiveLastItem();
             if (item != null)
             {
                 item.gameObject.SetActive(true);
@@ -122,10 +116,10 @@ public class Conveyor : Building
         return item != null;
     }
 
-    public bool Full()
+    public virtual bool Full()
     {
-        if (next == null || !(next is Conveyor)) return !CanTakeItem();
-        return ((Conveyor)next).Full() && !CanTakeItem();
+        if (output == null || !(output is Conveyor)) return !CanTakeItem();
+        return ((Conveyor)output).Full() && !CanTakeItem();
     }
 
     public Item GiveItem()
