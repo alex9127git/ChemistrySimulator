@@ -3,29 +3,32 @@ using static BuildingManager;
 
 public class Conveyor : Building
 {
-    protected Building output;
-    protected Building input;
+    [SerializeField] protected Building output;
+    [SerializeField] protected Building input;
     protected float moveSpeed;
     protected Vector3 direction;
-    protected Item item;
+    [SerializeField] protected Item holding;
+    [SerializeField] protected Item transit;
     protected Coordinate inC, outC;
 
     public Building Output { get => output; set => output = value; }
     public Building Input { get => input; set => input = value; }
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
     public Vector3 Direction { get => direction; set => direction = value; }
-    public Item Item { get => item; set => item = value; }
     public Coordinate InC { get => inC; set => inC = value; }
     public Coordinate OutC { get => outC; set => outC = value; }
+    public Item Holding { get => holding; set => holding = value; }
+    public Item Transit { get => transit; set => transit = value; }
 
     private bool deleted = false;
+    private float process;
 
     void Update()
     {
         CheckMoveAndDelete();
         UpdateInputAndOutput();
-        UpdateDirection();
         ReceiveItems();
+        MoveItems();
     }
 
     protected virtual void UpdateInputAndOutput()
@@ -73,47 +76,65 @@ public class Conveyor : Building
                     ((Conveyor)output).RecursiveDelete();
                 }
             }
-            if (item != null) Destroy(item.gameObject);
+            if (holding != null) Destroy(holding.gameObject);
+            if (transit != null) Destroy(transit.gameObject);
             Destroy(gameObject);
         }
     }
 
-    protected virtual void UpdateDirection()
+    protected virtual void MoveItems()
     {
-        moveSpeed = 1f;
-        Transform transform1 = gameObject.transform;
-        if (output != null)
+        if (HasHoldItem() && output is Conveyor && ((Conveyor)output).CanTakeItem())
         {
-            Transform transform2 = output.gameObject.transform;
-            direction = new Vector3(transform2.position.x - transform1.position.x, transform2.position.y - transform1.position.y);
+            holding.gameObject.SetActive(true);
+            ((Conveyor)output).transit = holding;
+            holding = null;
+            process = 0f;
         }
-        else
+        if (HasTransitItem())
         {
-            direction = new Vector3(0, 0, 0);
+            process += Time.deltaTime;
+            transit.transform.position = Vector3.Lerp(input.transform.position, transform.position, process);
+            if (process >= 1)
+            {
+                transit.transform.position = transform.position;
+                holding = transit;
+                transit = null;
+            }
         }
     }
 
     protected virtual void ReceiveItems()
     {
-        if (input != null && input is Factory && CanTakeItem())
+        if (input != null)
         {
-            item = ((Factory)input).GiveLastItem();
-            if (item != null)
+            if (input is Factory && CanTakeItem())
             {
-                item.gameObject.SetActive(true);
-                item.Conveyor = gameObject.GetComponent<Conveyor>();
+                transit = ((Factory)input).GiveLastItem();
+                if (transit != null)
+                {
+                    transit.transform.position = transform.position;
+                    process = 0f;
+                }
             }
         }
     }
 
     public bool CanTakeItem()
     {
-        return item == null;
+        if (holding != null) return false;
+        if (output == null) return holding == null && transit == null;
+        else return transit == null;
     }
 
-    public bool HasItem()
+    public bool HasHoldItem()
     {
-        return item != null;
+        return holding != null;
+    }
+
+    public bool HasTransitItem()
+    {
+        return transit != null;
     }
 
     public virtual bool Full()
@@ -124,8 +145,9 @@ public class Conveyor : Building
 
     public Item GiveItem()
     { 
-        Item i = item;
-        item = null;
+        Item i = holding;
+        holding = null;
+        process = 0f;
         return i;
     }
 }
