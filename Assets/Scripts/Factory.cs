@@ -11,8 +11,8 @@ public class Factory : Building
     public ArrayList Outputs { get => outputs; set => outputs = value; }
     public ArrayList Inputs { get => inputs; set => inputs = value; }
 
-    private Dictionary<ItemObject, int> inputItems = new Dictionary<ItemObject, int>();
-    private Queue outputItems = new Queue(10);
+    [SerializeField] private Dictionary<ItemObject, int> inputItems = new Dictionary<ItemObject, int>();
+    [SerializeField] private Queue outputItems = new Queue(10);
 
     private const int inputCapacity = 10;
     private const int outputCapacity = 10;
@@ -59,10 +59,9 @@ public class Factory : Building
     {
         foreach (Conveyor input in inputs)
         {
-            if (input != null && input.HasItem())
+            if (input != null && input.HasHoldItem())
             {
-                Item item = input.GiveItem();
-                ItemObject obj = item.ItemObj;
+                ItemObject obj = input.Holding.ItemObj;
                 if (!inputItems.ContainsKey(obj))
                 {
                     inputItems[obj] = 0;
@@ -70,6 +69,7 @@ public class Factory : Building
                 if (inputItems[obj] < inputCapacity)
                 {
                     inputItems[obj] += 1;
+                    Item item = input.GiveItem();
                     Destroy(item.gameObject);
                 }
             }

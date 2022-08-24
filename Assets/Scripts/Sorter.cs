@@ -25,7 +25,7 @@ public class Sorter : Conveyor
         CheckMoveAndDelete();
         UpdateUI();
         UpdateInputAndOutput();
-        UpdateDirection();
+        //UpdateDirection();
         ReceiveItems();
     }
 
@@ -65,6 +65,7 @@ public class Sorter : Conveyor
         }
     }
 
+    /*
     protected override void UpdateDirection()
     {
         moveSpeed = 1f;
@@ -104,4 +105,5 @@ public class Sorter : Conveyor
             }
         }
     }
+    */
 }
