@@ -21,7 +21,7 @@ public class Conveyor : Building
     public Item Transit { get => transit; set => transit = value; }
 
     private bool deleted = false;
-    private float process;
+    protected float process;
 
     void Update()
     {
@@ -84,23 +84,32 @@ public class Conveyor : Building
 
     protected virtual void MoveItems()
     {
-        if (HasHoldItem() && output is Conveyor && ((Conveyor)output).CanTakeItem())
-        {
-            holding.gameObject.SetActive(true);
-            ((Conveyor)output).transit = holding;
-            holding = null;
-            process = 0f;
-        }
+        TransferHoldingToTransit();
         if (HasTransitItem())
         {
             process += Time.deltaTime;
             transit.transform.position = Vector3.Lerp(input.transform.position, transform.position, process);
             if (process >= 1)
             {
-                transit.transform.position = transform.position;
-                holding = transit;
-                transit = null;
+                TransferTransitToHolding();
             }
+        }
+    }
+
+    protected virtual void TransferTransitToHolding()
+    {
+        transit.transform.position = transform.position;
+        holding = transit;
+        transit = null;
+    }
+
+    protected virtual void TransferHoldingToTransit()
+    {
+        if (HasHoldItem() && output is Conveyor && ((Conveyor)output).CanTakeItem())
+        {
+            ((Conveyor)output).transit = holding;
+            holding = null;
+            process = 0f;
         }
     }
 
@@ -113,7 +122,7 @@ public class Conveyor : Building
                 transit = ((Factory)input).GiveLastItem();
                 if (transit != null)
                 {
-                    transit.transform.position = transform.position;
+                    transit.transform.position = input.transform.position;
                     process = 0f;
                 }
             }
@@ -135,12 +144,6 @@ public class Conveyor : Building
     public bool HasTransitItem()
     {
         return transit != null;
-    }
-
-    public virtual bool Full()
-    {
-        if (output == null || !(output is Conveyor)) return !CanTakeItem();
-        return ((Conveyor)output).Full() && !CanTakeItem();
     }
 
     public Item GiveItem()

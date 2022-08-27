@@ -50,11 +50,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Objects
+  - name: Conveyors
     uniqueID: 2210822017
     locked: 0
   - name: Items
     uniqueID: 1282085241
+    locked: 0
+  - name: Factories
+    uniqueID: 3093235307
     locked: 0
   - name: Previews
     uniqueID: 1079191653

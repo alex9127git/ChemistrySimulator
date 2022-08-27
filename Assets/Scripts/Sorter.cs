@@ -25,8 +25,8 @@ public class Sorter : Conveyor
         CheckMoveAndDelete();
         UpdateUI();
         UpdateInputAndOutput();
-        //UpdateDirection();
         ReceiveItems();
+        MoveItems();
     }
 
     private void UpdateUI()
@@ -65,45 +65,34 @@ public class Sorter : Conveyor
         }
     }
 
-    /*
-    protected override void UpdateDirection()
+    protected override void TransferHoldingToTransit()
     {
-        moveSpeed = 1f;
-        Transform transform1 = gameObject.transform;
-        if (item != null) {
-            if (item.ItemObj == filter)
+        if (holding != null)
+        {
+            if (holding.ItemObj == filter)
             {
-                if (filterOutput != null)
+                if (HasHoldItem() && filterOutput is Conveyor && ((Conveyor)filterOutput).CanTakeItem())
                 {
-                    output = filterOutput;
-                    Transform transform2 = output.gameObject.transform;
-                    direction = new Vector3(transform2.position.x - transform1.position.x, transform2.position.y - transform1.position.y);
-                }
-                else
-                {
-                    direction = new Vector3(0, 0, 0);
+                    ((Conveyor)filterOutput).Transit = holding;
+                    holding = null;
+                    process = 0f;
                 }
             }
             else
             {
-                if (restOutput1 != null)
+                if (HasHoldItem() && restOutput1 is Conveyor && ((Conveyor)restOutput1).CanTakeItem())
                 {
-                    output = restOutput1;
-                    Transform transform2 = output.gameObject.transform;
-                    direction = new Vector3(transform2.position.x - transform1.position.x, transform2.position.y - transform1.position.y);
+                    ((Conveyor)restOutput1).Transit = holding;
+                    holding = null;
+                    process = 0f;
                 }
-                else if (restOutput2 != null)
+                else if (HasHoldItem() && restOutput2 is Conveyor && ((Conveyor)restOutput2).CanTakeItem())
                 {
-                    output = restOutput2;
-                    Transform transform2 = output.gameObject.transform;
-                    direction = new Vector3(transform2.position.x - transform1.position.x, transform2.position.y - transform1.position.y);
-                } 
-                else
-                {
-                    direction = new Vector3(0, 0, 0);
+                    ((Conveyor)restOutput2).Transit = holding;
+                    holding = null;
+                    process = 0f;
                 }
             }
         }
     }
-    */
 }
