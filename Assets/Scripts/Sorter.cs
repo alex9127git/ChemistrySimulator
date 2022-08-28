@@ -43,26 +43,10 @@ public class Sorter : Conveyor
 
     protected override void UpdateInputAndOutput()
     {
-        input = buildings[InC.X, InC.Y];
-        filterOutput = buildings[FilterOutC.X, FilterOutC.Y];
-        restOutput1 = buildings[RestOutC1.X, RestOutC1.Y];
-        restOutput2 = buildings[RestOutC2.X, RestOutC2.Y];
-        if (input != null && input is Factory)
-        {
-            ((Factory)input).Outputs.Add(this);
-        }
-        if (filterOutput != null && filterOutput is Factory)
-        {
-            ((Factory)filterOutput).Inputs.Add(this);
-        }
-        if (restOutput1 != null && restOutput1 is Factory)
-        {
-            ((Factory)restOutput1).Inputs.Add(this);
-        }
-        if (restOutput2 != null && restOutput2 is Factory)
-        {
-            ((Factory)restOutput2).Inputs.Add(this);
-        }
+        input = CheckInputConnection(inC);
+        filterOutput = CheckOutputConnection(filterOutC);
+        restOutput1 = CheckOutputConnection(restOutC1);
+        restOutput2 = CheckOutputConnection(restOutC2);
     }
 
     protected override void TransferHoldingToTransit()

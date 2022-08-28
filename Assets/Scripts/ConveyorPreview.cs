@@ -116,6 +116,7 @@ public class ConveyorPreview : MonoBehaviour
                 }
             }
             Conveyor conv = Instantiate(conveyorPrefabs[from, to], new Vector3(x, y), Quaternion.identity);
+            conv.C = new Coordinate(path[i, 0], path[i, 1]);
             buildings[path[i, 0], path[i, 1]] = conv;
             int inX = 0, inY = 0;
             switch (from)

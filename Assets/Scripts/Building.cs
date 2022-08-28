@@ -4,6 +4,9 @@ using static BuildingManager;
 public class Building : MonoBehaviour
 {
     public Transform preview;
+    protected Coordinate coordinate;
+
+    public Coordinate C { get => coordinate; set => coordinate = value; }
 
     void Update()
     {

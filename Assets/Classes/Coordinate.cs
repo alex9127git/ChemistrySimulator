@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class Coordinate
 {
     private int x;
@@ -15,4 +11,14 @@ public class Coordinate
 
     public int X { get => x; set => x = value; }
     public int Y { get => y; set => y = value; }
+
+    public override bool Equals(object obj)
+    {
+        return obj is Coordinate && x == ((Coordinate)obj).x && y == ((Coordinate)obj).y;
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
 }

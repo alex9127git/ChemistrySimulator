@@ -34,6 +34,7 @@ public class BuildingPreview : MonoBehaviour
                         buildings[x, y] = buildings[x, y + 1] = buildings[x, y - 1] = buildings[x - 1, y
                             ] = buildings[x - 1, y + 1] = buildings[x - 1, y - 1] = buildings[x + 1, y
                             ] = buildings[x + 1, y + 1] = buildings[x + 1, y - 1] = obj;
+                        obj.C = new Coordinate(x, y);
                         Destroy(gameObject);
                         busy = false;
                     }
@@ -50,6 +51,7 @@ public class BuildingPreview : MonoBehaviour
                     {
                         Building obj = Instantiate(prefab, transform.position, transform.rotation);
                         buildings[x, y] = buildings[x, y + 1] = buildings[x + 1, y] = buildings[x + 1, y + 1] = obj;
+                        obj.C = new Coordinate(x, y);
                         Destroy(gameObject);
                         busy = false;
                     }
@@ -65,7 +67,7 @@ public class BuildingPreview : MonoBehaviour
                     {
                         Sorter obj = (Sorter)Instantiate(prefab, transform.position, transform.rotation);
                         Destroy(buildings[x, y].gameObject);
-                        buildings[x, y] = obj;
+                        obj.C = new Coordinate(x, y);
                         int rotation = (int)(transform.rotation.eulerAngles.z / 90);
                         Coordinate right = new Coordinate(x + 1, y);
                         Coordinate left = new Coordinate(x - 1, y);
@@ -98,6 +100,7 @@ public class BuildingPreview : MonoBehaviour
                                 obj.RestOutC2 = left;
                                 break;
                         }
+                        buildings[x, y] = obj;
                     }
                     Destroy(gameObject);
                     busy = false;
@@ -108,6 +111,7 @@ public class BuildingPreview : MonoBehaviour
                     {
                         Building obj = Instantiate(prefab, transform.position, transform.rotation);
                         buildings[x, y] = obj;
+                        obj.C = new Coordinate(x, y);
                         Destroy(gameObject);
                         busy = false;
                     }

@@ -8,8 +8,8 @@ public class Factory : Building
     private ArrayList inputs = new ArrayList();
     private ArrayList outputs = new ArrayList();
 
-    public ArrayList Outputs { get => outputs; set => outputs = value; }
-    public ArrayList Inputs { get => inputs; set => inputs = value; }
+    [SerializeField] public ArrayList Outputs { get => outputs; set => outputs = value; }
+    [SerializeField] public ArrayList Inputs { get => inputs; set => inputs = value; }
 
     [SerializeField] private Dictionary<ItemObject, int> inputItems = new Dictionary<ItemObject, int>();
     [SerializeField] private Queue outputItems = new Queue(10);

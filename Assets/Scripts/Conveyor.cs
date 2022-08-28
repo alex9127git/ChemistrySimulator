@@ -33,16 +33,57 @@ public class Conveyor : Building
 
     protected virtual void UpdateInputAndOutput()
     {
-        input = buildings[inC.X, inC.Y];
-        output = buildings[outC.X, outC.Y];
-        if (input != null && input is Factory)
+        input = CheckInputConnection(inC);
+        output = CheckOutputConnection(outC);
+    }
+
+    protected Building CheckInputConnection(Coordinate c)
+    {
+        Building b = buildings[c.X, c.Y];
+        if (b != null)
         {
-            ((Factory)input).Outputs.Add(this);
+            if (b is Sorter)
+            {
+                if (((Sorter)b).FilterOutC.Equals(C) || ((Sorter)b).RestOutC1.Equals(C) || ((Sorter)b).RestOutC2.Equals(C))
+                {
+                    return b;
+                }
+            }
+            else if (b is Conveyor)
+            {
+                if (((Conveyor)b).OutC.Equals(C))
+                {
+                    return b;
+                }
+            }
+            else if (b is Factory)
+            {
+                ((Factory)b).Outputs.Add(this);
+                return b;
+            }
         }
-        if (output != null && output is Factory)
+        return null;
+    }
+
+    protected Building CheckOutputConnection(Coordinate c)
+    {
+        Building b = buildings[c.X, c.Y];
+        if (b != null)
         {
-            ((Factory)output).Inputs.Add(this);
+            if (b is Conveyor)
+            {
+                if (((Conveyor)b).InC.Equals(C))
+                {
+                    return b;
+                }
+            }
+            else if (b is Factory)
+            {
+                ((Factory)b).Inputs.Add(this);
+                return b;
+            }
         }
+        return null;
     }
 
     protected override void CheckMoveAndDelete()
