@@ -714,6 +714,8 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
+    - m_Text: ---
+      m_Image: {fileID: 0}
     - m_Text: H<sub>2</sub>O
       m_Image: {fileID: 21300000, guid: 371efad32a47844429dcaec5e0d5880f, type: 3}
     - m_Text: H<sub>2</sub>
@@ -726,6 +728,8 @@ MonoBehaviour:
       m_Image: {fileID: 21300000, guid: fba5f2bed8e91c5498dc31d3dee37ba5, type: 3}
     - m_Text: CO<sub>2</sub>
       m_Image: {fileID: 21300000, guid: a224641796f35654daabee57b757abe3, type: 3}
+    - m_Text: H<sub>2</sub>CO<sub>3</sub>
+      m_Image: {fileID: 21300000, guid: adfc75d7342990941a95772a989fac60, type: 3}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

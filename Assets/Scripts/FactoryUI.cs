@@ -79,6 +79,14 @@ public class FactoryUI : MonoBehaviour
                     secondInputCoef.text = "2";
                     reaction = reactionManager.FindReactionWithName("CH4 + 2O2 = CO2 + 2H2O");
                 }
+                else if (input.captionText.text == "H<sub>2</sub>O" && secondaryInput.captionText.text == "CO<sub>2</sub>")
+                {
+                    output.text = "H<sub>2</sub>CO<sub>3</sub>";
+                    secondaryOutput.text = "---";
+                    inputCoef.text = "1";
+                    secondInputCoef.text = "1";
+                    reaction = reactionManager.FindReactionWithName("H2O + CO2 = H2CO3");
+                }
                 else
                 {
                     output.text = "---";

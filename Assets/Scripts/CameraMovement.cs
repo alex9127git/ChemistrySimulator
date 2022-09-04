@@ -5,7 +5,6 @@ public class CameraMovement : MonoBehaviour
     public float accelX;
     public float accelY;
     const float delta = 0.02f;
-    const float slow = 0.01f;
     const float max = 10f;
 
     void Start()
@@ -23,36 +22,39 @@ public class CameraMovement : MonoBehaviour
 
     void DecelerateOverTime()
     {
-        if (accelX > 0)
+        if (!Input.anyKey)
         {
-            accelX -= slow;
-            if (accelX < 0)
-            {
-                accelX = 0f;
-            }
-        }
-        else if (accelX < 0)
-        {
-            accelX += slow;
             if (accelX > 0)
             {
-                accelX = 0f;
+                accelX -= delta;
+                if (accelX < 0)
+                {
+                    accelX = 0f;
+                }
             }
-        }
-        if (accelY > 0)
-        {
-            accelY -= slow;
-            if (accelY < 0)
+            else if (accelX < 0)
             {
-                accelY = 0f;
+                accelX += delta;
+                if (accelX > 0)
+                {
+                    accelX = 0f;
+                }
             }
-        }
-        else if (accelY < 0)
-        {
-            accelY += slow;
             if (accelY > 0)
             {
-                accelY = 0f;
+                accelY -= delta;
+                if (accelY < 0)
+                {
+                    accelY = 0f;
+                }
+            }
+            else if (accelY < 0)
+            {
+                accelY += delta;
+                if (accelY > 0)
+                {
+                    accelY = 0f;
+                }
             }
         }
     }
