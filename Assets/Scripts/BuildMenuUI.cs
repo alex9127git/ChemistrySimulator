@@ -39,6 +39,9 @@ public class BuildMenuUI : MonoBehaviour
             case "Sorter":
                 previewID = 5;
                 break;
+            case "Incinerator":
+                previewID = 6;
+                break;
         }
         Instantiate(previews[previewID], new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
     }

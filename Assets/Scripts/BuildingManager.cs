@@ -30,6 +30,7 @@ public class BuildingManager : MonoBehaviour
                 break;
             case "ElectroSeparator":
             case "Sorter":
+            case "Incinerator":
                 buildingSize = 1;
                 break;
         }

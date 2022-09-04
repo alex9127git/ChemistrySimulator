@@ -11,8 +11,8 @@ public class Factory : Building
     [SerializeField] public ArrayList Outputs { get => outputs; set => outputs = value; }
     [SerializeField] public ArrayList Inputs { get => inputs; set => inputs = value; }
 
-    [SerializeField] private Dictionary<ItemObject, int> inputItems = new Dictionary<ItemObject, int>();
-    [SerializeField] private Queue outputItems = new Queue(10);
+    [SerializeField] protected Dictionary<ItemObject, int> inputItems = new Dictionary<ItemObject, int>();
+    [SerializeField] protected Queue outputItems = new Queue(10);
 
     private const int inputCapacity = 10;
     private const int outputCapacity = 10;
@@ -23,13 +23,13 @@ public class Factory : Building
 
     public ReactionObject Reaction { get => currentReaction; set => currentReaction = value; }
 
-    void Start()
+    protected virtual void Start()
     {
         StartCoroutine(ProduceItems());
         GetComponentInChildren<FactoryUI>(true).CloseFactoryUI();
     }
 
-    void Update()
+    protected virtual void Update()
     {
         CheckMoveAndDelete();
         UpdateUI();
@@ -37,13 +37,13 @@ public class Factory : Building
         AcceptItems();
     }
 
-    private void UpdateInputsAndOutputs()
+    protected virtual void UpdateInputsAndOutputs()
     {
         inputs.Remove(null);
         outputs.Remove(null);
     }
 
-    private void UpdateUI()
+    protected virtual void UpdateUI()
     {
         Vector3 v = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float distX = transform.position.x - v.x;
@@ -55,7 +55,7 @@ public class Factory : Building
         }
     }
 
-    private void AcceptItems()
+    protected virtual void AcceptItems()
     {
         foreach (Conveyor input in inputs)
         {
@@ -76,7 +76,7 @@ public class Factory : Building
         }
     }
 
-    IEnumerator ProduceItems()
+    protected virtual IEnumerator ProduceItems()
     {
         while (true)
         {
@@ -106,7 +106,7 @@ public class Factory : Building
         }
     }
 
-    public Item GiveLastItem()
+    public virtual Item GiveLastItem()
     {
         if (outputItems.Count > 0)
         {
@@ -119,12 +119,12 @@ public class Factory : Building
         return null;
     }
 
-    public int OutputItemsCount()
+    public virtual int OutputItemsCount()
     {
         return outputItems.Count;
     }
 
-    private Dictionary<ItemObject, int> CloneDictoinary(Dictionary<ItemObject, int> dict)
+    protected virtual Dictionary<ItemObject, int> CloneDictoinary(Dictionary<ItemObject, int> dict)
     {
         Dictionary<ItemObject, int> cloned = new Dictionary<ItemObject, int>();
         foreach (ItemObject itemObj in dict.Keys)
