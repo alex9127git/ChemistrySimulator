@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 818a2b26d6d715847bc332fae312431e, type: 3}
+  m_Name: C + O2 = CO2
+  m_EditorClassIdentifier: 
+  reactionName: C + O2 = CO2
+  inputs:
+  - {fileID: 11400000, guid: fb137348236d27d4b9a9110204c82542, type: 2}
+  - {fileID: 11400000, guid: d78c88fd7c54c7446a5c5f6494fd8643, type: 2}
+  outputs:
+  - {fileID: 11400000, guid: b11723aa7055dfb4784cc9c3fe4d3b33, type: 2}
+  reactionTime: 1

@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using System;
 
 public class FactoryUI : MonoBehaviour
 {
@@ -54,6 +53,13 @@ public class FactoryUI : MonoBehaviour
                     inputCoef.text = "2";
                     reaction = reactionManager.FindReactionWithName("2H2O = 2H2 + O2");
                 }
+                else if (input.captionText.text == "CH<sub>4</sub>")
+                {
+                    output.text = "C";
+                    secondaryOutput.text = "2 H<sub>2</sub>";
+                    inputCoef.text = "1";
+                    reaction = reactionManager.FindReactionWithName("CH4 = C + 2H2");
+                }
                 else
                 {
                     output.text = "---";
@@ -91,6 +97,22 @@ public class FactoryUI : MonoBehaviour
                 {
                     output.text = "---";
                     secondaryOutput.text = "---";
+                    inputCoef.text = "-";
+                    secondInputCoef.text = "-";
+                    reaction = reactionManager.FindReactionWithName("No Reaction");
+                }
+                break;
+            case "ReagentOxidizer":
+                if (input.captionText.text == "C")
+                {
+                    output.text = "CO2";
+                    inputCoef.text = "1";
+                    secondInputCoef.text = "1";
+                    reaction = reactionManager.FindReactionWithName("C + O2 = CO2");
+                }
+                else
+                {
+                    output.text = "---";
                     inputCoef.text = "-";
                     secondInputCoef.text = "-";
                     reaction = reactionManager.FindReactionWithName("No Reaction");

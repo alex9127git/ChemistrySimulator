@@ -730,6 +730,8 @@ MonoBehaviour:
       m_Image: {fileID: 21300000, guid: a224641796f35654daabee57b757abe3, type: 3}
     - m_Text: H<sub>2</sub>CO<sub>3</sub>
       m_Image: {fileID: 21300000, guid: adfc75d7342990941a95772a989fac60, type: 3}
+    - m_Text: C
+      m_Image: {fileID: 21300000, guid: 5d349a38efc1f3443bbe03fe0e7c622f, type: 3}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

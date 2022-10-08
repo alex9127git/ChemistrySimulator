@@ -4,7 +4,7 @@ public class CameraMovement : MonoBehaviour
 {
     public float accelX;
     public float accelY;
-    const float delta = 0.02f;
+    const float deltaPerSecond = 2f;
     const float max = 10f;
 
     void Start()
@@ -26,7 +26,7 @@ public class CameraMovement : MonoBehaviour
         {
             if (accelX > 0)
             {
-                accelX -= delta;
+                accelX -= deltaPerSecond * Time.deltaTime;
                 if (accelX < 0)
                 {
                     accelX = 0f;
@@ -34,7 +34,7 @@ public class CameraMovement : MonoBehaviour
             }
             else if (accelX < 0)
             {
-                accelX += delta;
+                accelX += deltaPerSecond * Time.deltaTime;
                 if (accelX > 0)
                 {
                     accelX = 0f;
@@ -42,7 +42,7 @@ public class CameraMovement : MonoBehaviour
             }
             if (accelY > 0)
             {
-                accelY -= delta;
+                accelY -= deltaPerSecond * Time.deltaTime;
                 if (accelY < 0)
                 {
                     accelY = 0f;
@@ -50,7 +50,7 @@ public class CameraMovement : MonoBehaviour
             }
             else if (accelY < 0)
             {
-                accelY += delta;
+                accelY += deltaPerSecond * Time.deltaTime;
                 if (accelY > 0)
                 {
                     accelY = 0f;
@@ -63,7 +63,7 @@ public class CameraMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            accelX -= delta;
+            accelX -= deltaPerSecond * Time.deltaTime;
             if (accelX < -max)
             {
                 accelX = -max;
@@ -71,7 +71,7 @@ public class CameraMovement : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.D))
         {
-            accelX += delta;
+            accelX += deltaPerSecond * Time.deltaTime;
             if (accelX > max)
             {
                 accelX = max;
@@ -79,7 +79,7 @@ public class CameraMovement : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.S))
         {
-            accelY -= delta;
+            accelY -= deltaPerSecond * Time.deltaTime;
             if (accelY < -max)
             {
                 accelY = -max;
@@ -87,7 +87,7 @@ public class CameraMovement : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.W))
         {
-            accelY += delta;
+            accelY += deltaPerSecond * Time.deltaTime;
             if (accelY > max)
             {
                 accelY = max;
