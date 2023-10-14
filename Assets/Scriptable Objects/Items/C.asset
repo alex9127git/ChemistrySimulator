@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: C
   m_EditorClassIdentifier: 
   itemName: C
+  itemNameDecorated: C
+  itemID: 7
   texture: {fileID: 21300000, guid: 5d349a38efc1f3443bbe03fe0e7c622f, type: 3}

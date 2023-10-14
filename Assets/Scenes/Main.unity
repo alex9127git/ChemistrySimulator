@@ -207,15 +207,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 224380123}
-        m_TargetAssemblyTypeName: ButtonsOnClickScript, Assembly-CSharp
+        m_TargetAssemblyTypeName: BuildMenuUI, Assembly-CSharp
         m_MethodName: StartBuilding
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 6
           m_FloatArgument: 0
-          m_StringArgument: Incinerator
+          m_StringArgument: 6
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &8794930
@@ -427,13 +427,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80110107}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 550.4209, y: 168.14456, z: -3.1671104}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 2115911160}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &172499236
 GameObject:
@@ -519,15 +519,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 224380123}
-        m_TargetAssemblyTypeName: ButtonsOnClickScript, Assembly-CSharp
+        m_TargetAssemblyTypeName: BuildMenuUI, Assembly-CSharp
         m_MethodName: StartBuilding
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
-          m_StringArgument: ReagentMixer
+          m_StringArgument: 4
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &172499239
@@ -686,7 +686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingUI: {fileID: 1374097021}
-  previews:
+  buildingPreviews:
   - {fileID: 1793089299039921840, guid: 03abdaa4f298f2340b8e6a50538ae15b, type: 3}
   - {fileID: 7923083194680274036, guid: 3e5953b46ed49cb4db72709ebd7420d0, type: 3}
   - {fileID: 1315270869823641979, guid: c9fc12422cb485844a80dfef73fb5ca7, type: 3}
@@ -779,15 +779,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 224380123}
-        m_TargetAssemblyTypeName: ButtonsOnClickScript, Assembly-CSharp
+        m_TargetAssemblyTypeName: BuildMenuUI, Assembly-CSharp
         m_MethodName: StartBuilding
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 7
           m_FloatArgument: 0
-          m_StringArgument: ReagentOxidizer
+          m_StringArgument: 7
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &288526073
@@ -864,13 +864,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330296726}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 550.4209, y: 168.14456, z: -3.1671104}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 2115911160}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &469246884
 GameObject:
@@ -1204,15 +1204,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 224380123}
-        m_TargetAssemblyTypeName: ButtonsOnClickScript, Assembly-CSharp
+        m_TargetAssemblyTypeName: BuildMenuUI, Assembly-CSharp
         m_MethodName: StartBuilding
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: WaterExtractor
+          m_StringArgument: 0
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &642437767
@@ -1283,12 +1283,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
+  - {fileID: 11400000, guid: 87ae3ec693fe49248a8f48379f56b053, type: 2}
+  - {fileID: 11400000, guid: fc3e96d4c5dfbec45bf2d326cb3a3f81, type: 2}
+  - {fileID: 11400000, guid: d78c88fd7c54c7446a5c5f6494fd8643, type: 2}
   - {fileID: 11400000, guid: 23c609cc714231c40b5b53b724481fdb, type: 2}
   - {fileID: 11400000, guid: 44c1420d3da0c5644acd231acfec3f35, type: 2}
   - {fileID: 11400000, guid: b11723aa7055dfb4784cc9c3fe4d3b33, type: 2}
-  - {fileID: 11400000, guid: fc3e96d4c5dfbec45bf2d326cb3a3f81, type: 2}
-  - {fileID: 11400000, guid: 87ae3ec693fe49248a8f48379f56b053, type: 2}
-  - {fileID: 11400000, guid: d78c88fd7c54c7446a5c5f6494fd8643, type: 2}
   - {fileID: 11400000, guid: 370523f214a7c1341858b38a51316c10, type: 2}
   - {fileID: 11400000, guid: fb137348236d27d4b9a9110204c82542, type: 2}
 --- !u!4 &824802306
@@ -1298,13 +1298,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824802304}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 568.2756, y: 275.43283, z: -2.2020414}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 2115911160}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &994345697
 GameObject:
@@ -1457,15 +1457,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 224380123}
-        m_TargetAssemblyTypeName: ButtonsOnClickScript, Assembly-CSharp
+        m_TargetAssemblyTypeName: BuildMenuUI, Assembly-CSharp
         m_MethodName: StartBuilding
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
-          m_StringArgument: Conveyor
+          m_StringArgument: 1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1173501601
@@ -1675,15 +1675,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 224380123}
-        m_TargetAssemblyTypeName: ButtonsOnClickScript, Assembly-CSharp
+        m_TargetAssemblyTypeName: BuildMenuUI, Assembly-CSharp
         m_MethodName: StartBuilding
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
-          m_StringArgument: ElectroSeparator
+          m_StringArgument: 2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1388613057
@@ -1770,13 +1770,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1452978374}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 550.4209, y: 168.14456, z: -3.1671104}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 2115911160}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1610853208
 GameObject:
@@ -2079,15 +2079,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 224380123}
-        m_TargetAssemblyTypeName: ButtonsOnClickScript, Assembly-CSharp
+        m_TargetAssemblyTypeName: BuildMenuUI, Assembly-CSharp
         m_MethodName: StartBuilding
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
-          m_StringArgument: Sorter
+          m_StringArgument: 5
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1895170702
@@ -2212,15 +2212,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 224380123}
-        m_TargetAssemblyTypeName: ButtonsOnClickScript, Assembly-CSharp
+        m_TargetAssemblyTypeName: BuildMenuUI, Assembly-CSharp
         m_MethodName: StartBuilding
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
-          m_StringArgument: GasExtractor
+          m_StringArgument: 3
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2018101998
@@ -2395,3 +2395,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2097436644}
   m_CullTransparentMesh: 1
+--- !u!1 &2115911159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2115911160}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2115911160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115911159}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1452978376}
+  - {fileID: 330296728}
+  - {fileID: 80110109}
+  - {fileID: 824802306}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

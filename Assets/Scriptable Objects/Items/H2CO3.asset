@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: H2CO3
   m_EditorClassIdentifier: 
   itemName: H2CO3
+  itemNameDecorated: H<sub>2</sub>CO<sub>3</sub>
+  itemID: 6
   texture: {fileID: 21300000, guid: adfc75d7342990941a95772a989fac60, type: 3}

@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: H2
   m_EditorClassIdentifier: 
   itemName: H2
+  itemNameDecorated: H<sub>2</sub>
+  itemID: 1
   texture: {fileID: 21300000, guid: c4efb740c135dca4f98b52c2cc1dd0bc, type: 3}

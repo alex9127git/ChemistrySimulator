@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: CO2
   m_EditorClassIdentifier: 
   itemName: CO2
+  itemNameDecorated: CO<sub>2</sub>
+  itemID: 5
   texture: {fileID: 21300000, guid: a224641796f35654daabee57b757abe3, type: 3}

@@ -380,7 +380,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: H<sub>2</sub>O
+  m_text: ---
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -716,22 +716,6 @@ MonoBehaviour:
     m_Options:
     - m_Text: ---
       m_Image: {fileID: 0}
-    - m_Text: H<sub>2</sub>O
-      m_Image: {fileID: 21300000, guid: 371efad32a47844429dcaec5e0d5880f, type: 3}
-    - m_Text: H<sub>2</sub>
-      m_Image: {fileID: 21300000, guid: c4efb740c135dca4f98b52c2cc1dd0bc, type: 3}
-    - m_Text: O<sub>2</sub>
-      m_Image: {fileID: 21300000, guid: 7ca7deab88bcac748a414664bb9163bc, type: 3}
-    - m_Text: CH<sub>4</sub>
-      m_Image: {fileID: 21300000, guid: ff13a70e70766cf4da61df213aa7ee65, type: 3}
-    - m_Text: CO
-      m_Image: {fileID: 21300000, guid: fba5f2bed8e91c5498dc31d3dee37ba5, type: 3}
-    - m_Text: CO<sub>2</sub>
-      m_Image: {fileID: 21300000, guid: a224641796f35654daabee57b757abe3, type: 3}
-    - m_Text: H<sub>2</sub>CO<sub>3</sub>
-      m_Image: {fileID: 21300000, guid: adfc75d7342990941a95772a989fac60, type: 3}
-    - m_Text: C
-      m_Image: {fileID: 21300000, guid: 5d349a38efc1f3443bbe03fe0e7c622f, type: 3}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

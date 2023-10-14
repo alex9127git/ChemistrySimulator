@@ -3,7 +3,7 @@ using UnityEngine;
 public class BuildMenuUI : MonoBehaviour
 {
     public GameObject buildingUI;
-    public Transform[] previews;
+    public Transform[] buildingPreviews;
 
     public void OpenBuildingUI()
     {
@@ -15,38 +15,10 @@ public class BuildMenuUI : MonoBehaviour
         buildingUI.SetActive(false);
     }
 
-    public void StartBuilding(string building)
+    public void StartBuilding(int buildingID)
     {
         CloseBuildingUI();
-        int previewID = 0;
-        switch (building)
-        {
-            case "WaterExtractor":
-                previewID = 0;
-                break;
-            case "Conveyor":
-                previewID = 1;
-                break;
-            case "ElectroSeparator":
-                previewID = 2;
-                break;
-            case "GasExtractor":
-                previewID = 3;
-                break;
-            case "ReagentMixer":
-                previewID = 4;
-                break;
-            case "Sorter":
-                previewID = 5;
-                break;
-            case "Incinerator":
-                previewID = 6;
-                break;
-            case "ReagentOxidizer":
-                previewID = 7;
-                break;
-        }
-        Instantiate(previews[previewID], new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
+        Instantiate(buildingPreviews[buildingID], new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
     }
 
     void Update()
